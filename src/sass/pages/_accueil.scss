@@ -1,0 +1,14 @@
+.card {
+    border : solid white 1px;
+    overflow: hidden;
+    &-img-top {
+        height: 345px;
+    }    
+    &-deck--bottom {
+        margin-bottom: 90px;
+    }
+}
+
+.zoom {
+    @include zoom;
+}
