@@ -1,0 +1,15 @@
+{
+  "name": "orinoco2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch src/sass/style.scss:dist/css/style.css --style compressed",
+    "prefix": "postcss dist/css/style.css --use autoprefixer -d dist/css/prefixed/"
+  },
+  "author": "fpreuvot",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.5.2"
+  }
+}

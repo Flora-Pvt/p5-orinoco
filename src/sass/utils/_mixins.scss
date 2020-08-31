@@ -1,0 +1,13 @@
+@mixin zoom {
+    display: inline-block;
+    border: 0;
+    opacity: 1;
+    transition: all 400ms ease-in;
+    transform: scale(1);    
+
+    &:hover {
+        opacity: 0.6;
+        transition: all 400ms ease-in;
+        transform: scale(1.1);     
+    }
+}
