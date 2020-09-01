@@ -1,50 +1,3 @@
-/*let httpRequest = new XMLHttpRequest();
-
-let products = document.querySelector('.container'); 
-
-let url = 'http://localhost:3000/api/teddies';
-
-httpRequest.onreadystatechange = function () {
-    if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
-
-        let products = document.querySelector('.container'); 
-        let section = document.createElement('section');
-        section.setAttribute('class', 'card-deck');
-
-
-        section.innerHTML += `<article class="card">            
-            <img class="card-img-top zoom" src="http://localhost:3000/images/teddy_1.jpg alt="the teddy bear Norbert" />            
-            <footer class="card-body text-body">                                
-                              
-                <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>                                   
-                
-            </footer>       
-        </article>`;
-
-        products.appendChild(section);        
-
-    } else {
-
-    }
-};
-    
-httpRequest.open('GET', url, true);
-
-httpRequest.send();
-
-function price(jsonObj) {
-    let products = document.querySelector('.container');     
-
-    let teddiesPrice = document.createElement('p');
-    teddiesPrice.setAttribute('class', 'card-text'); 
-    teddiesPrice.textContent = jsonObj['price'] + '€';
-    products.appendChild(teddiesPrice);
-}*/
-
-// freeCodeCamp exemple //
-
 // variables 
 const cartBtn = document.querySelector('.cart-btn');
 const closeCartBtn = document.querySelector('.close-cart');
@@ -55,8 +8,11 @@ const cartItems = document.querySelector('.cart-items');
 const cartTotal = document.querySelector('.cart-total');
 const cartContent = document.querySelector('.cart-content');
 
-
+// cart
 let cart = [];
+
+//buttons
+let buttonsDOM = [];
 
 // getting the products
 class Products {
@@ -71,12 +27,10 @@ class Products {
                 const description = item.description;
                 const price = item.price;
                 const image = item.imageUrl;
+                const id = item._id;
                 // return clean objet
-                return {name, description, price, image};
-            });
-            console.log(products);
-
-
+                return {name, description, price, image, id};
+            });           
             return products;            
         } catch (error) {
             console.log(error);
@@ -91,14 +45,14 @@ class UI {
         products.forEach(product => {
             const productsDOM = document.querySelector('.products-center');
             productsDOM.innerHTML += `
-            <article class="card col-6">
-                <div class="card-border">
-                    <a class="" href="pages/product.html">
+            <article class="card col-12 col-md-6">
+                <header class="card-img-border">
+                    <a class="bag-btn" data-id=${product.id}>
                         <img class="card-img-top zoom" src=${product.image} alt="teddy bear ${product.name}" />
                     </a>
-                </div>
-                <footer class="card-body text-body">
-                    <a href="pages/product.html">
+                </header>
+                <section class="card-body text-body">
+                    <a class="bag-btn" data-id=${product.id}>
                         <p class="card-title text-body">
                             ${product.name}
                         </p>
@@ -109,23 +63,144 @@ class UI {
                     <p class="card-text">
                         ${product.price / 100} €
                     </p>
-                </footer> 
+                </section> 
             </article>
             `;
+        });        
+    }
+    getBagButtons() {
+        const buttons = [...document.querySelectorAll('.bag-btn')];
+        buttonsDOM = buttons;
+        buttons.forEach(button =>{
+            let id = button.dataset.id;
+            let inCart = cart.find(item => item.id === id);
+            if(inCart) {
+                //button.innerText = "In Cart";                
+                button.disabled = true;
+            }
+            button.addEventListener('click',(even)=>{
+                //event.target.innerText = "In Cart";                
+                // allow just one of each product in cart
+                event.target.disabled = true;
+                // get product from products
+                let cartItem = {...Storage.getProduct(id),amount:1};                
+                // add product to the cart
+                cart = [...cart,cartItem];                
+                // save cart in local storage
+                Storage.saveCart(cart);                
+                // set cart values
+                this.setCartValues(cart);
+                // display cart items
+                this.addCartItem(cartItem);
+                // show the cart    
+                this.showCart();            
+                });            
         });
-         
+    } 
+    setCartValues(cart){
+        let tempTotal = 0;
+        let itemsTotal = 0;
+        cart.map(item =>{
+            tempTotal += item.price * item.amount / 100;
+            itemsTotal += item.amount;
+        });
+        cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
+        cartItems.innerText = itemsTotal;        
+    }
+    addCartItem(item){
+        const div = document.createElement('div');        
+        div.classList.add('cart-item');
+        div.innerHTML = `        
+            <img class="" src=${item.image} alt="teddy bear ${item.name}" />     
+            <h4 class="text-body">
+                ${item.name}
+            </h4>       
+            <h5 class="card-text">
+                ${item.price / 100} €
+            </h5>           
+            <!-- item functionality -->
+            <p><span data-id=${item.id}>+</span><span class="item-amount">${item.amount}</span><span data-id=${item.id}>-</span></p>
+            <span class="remove-item" data-id=${item.id}>remove</span>             
+     `;
+    cartContent.appendChild(div);    
+    }
+    showCart() {
+        cartOverlay.classList.add("transparentBcg");
+        cartDOM.classList.add("showCart");
+    }    
+    setupAPP() {
+        cart = Storage.getCart();
+        this.setCartValues(cart);
+        this.populateCart(cart);        
+        cartBtn.addEventListener('click',this.showCart);
+        closeCartBtn.addEventListener('click',this.hideCart);
+    }
+    populateCart(cart){
+        cart.forEach(item =>this.addCartItem(item));
+    }
+    hideCart() {
+        cartOverlay.classList.remove("transparentBcg");
+        cartDOM.classList.remove("showCart");
+    }
+    cartLogic() {
+        // clear cart button
+        clearCartBtn.addEventListener('click', () => {
+            this.clearCart();
+        });
+        // cart functionality
+    }
+    clearCart() {
+        let cartItems = cart.map(item => item.id);
+        cartItems.forEach(id => this.removeItem(id));
+        console.log(cartContent.children);
+
+        while(cartContent.children.lenght>0) {
+            cartContent.removeChild(cartContent.children[0]);
+        }
+        this.hideCart();
+    }
+    removeItem(id) {
+        cart = cart.filter(item => item.id !==id);
+        this.setCartValues(cart);
+        Storage.saveCart(cart);
+        let button = this.getSingleButton(id);
+        button.disabled = false;        
+    }
+    getSingleButton(id) {
+        return buttonsDOM.find(button => button.dataset.id ===id);
     }
 }   
 
 // local storage
 class Storage {
-
+    static saveProducts(products) {
+        localStorage.setItem("products", JSON.stringify(products));
+    }
+    static getProduct(id) {
+        let products = JSON.parse(localStorage.getItem('products'));
+        return products.find(product => product.id === id);
+    }
+    static saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    static getCart() {
+        // check if items exist, if not nothing change
+        return localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):[];
+    }
 }
 
 document.addEventListener("DOMContentLoaded", ()=> {
     const ui = new UI();
     const products = new Products();
+    // setup app
+    ui.setupAPP();
 
-    //get all products
-    products.getProducts().then(products => ui.displayProducts(products));
+    // get all products
+    products.getProducts().then(products => {
+    ui.displayProducts(products);
+    Storage.saveProducts(products);
+    }).then(()=>{
+        ui.getBagButtons();
+        ui.cartLogic();
+    });
 });
