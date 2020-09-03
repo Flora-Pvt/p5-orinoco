@@ -31,33 +31,49 @@
         <a class="mx-auto" href="../index.html" aria-label="link to home page">
             <img src="../src/static/images/logo-orinoco-small.png" alt="Orinoco logo represented by a cart">            
         </a>
-        <a href="pages/cart.html" aria-label="link to cart page">
-            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-basket2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a aria-label="link to cart page">
+            <div class="cart-items text-body">
+                0
+            </div>
+            <svg class="cart-btn" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-basket2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z"/>
                 <path fill-rule="evenodd" d="M11.314 1.036a.5.5 0 0 1 .65.278l2 5a.5.5 0 1 1-.928.372l-2-5a.5.5 0 0 1 .278-.65zm-6.628 0a.5.5 0 0 0-.65.278l-2 5a.5.5 0 1 0 .928.372l2-5a.5.5 0 0 0-.278-.65z"/>
                 <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z"/>
-              </svg>
+            </svg>            
         </a>
     </header>
 
     <!-- main --> 
-    <main class="container">
-        
-                <a class="" href="cart.html">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2 text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z"/>
-                        <path fill-rule="evenodd" d="M11.314 1.036a.5.5 0 0 1 .65.278l2 5a.5.5 0 1 1-.928.372l-2-5a.5.5 0 0 1 .278-.65zm-6.628 0a.5.5 0 0 0-.65.278l-2 5a.5.5 0 1 0 .928.372l2-5a.5.5 0 0 0-.278-.65z"/>
-                        <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z"/>
-                    </svg>
-                    <p class="text-body">
-                        Add
-                    </p>
-                </a>
-            
+    <main class="container product">
+        <article class="row  align-items-center">
+            <!-- product -->
+                
+            <!-- product -->
+        </article>      
     </main>
 
+    <!-- cart -->
+    <div class="cart-overlay">
+        <div class="cart">
+            <p class="close-cart">X</p>
+            <h2>Cart</h2>
+            <div class="cart-content">
+                <!-- cart item -->
+                <!-- <div class="cart-item">
+                      
+                    </div> -->
+                <!-- cart item -->
+            </div>
+            <div class="cart-footer">
+                <h3>Total : <span class="cart-total">0</span> €</h3>
+                <button class="clear-cart banner-btn">clear cart</button>
+            </div>
+        </div>
+    </div>
+    <!-- end of cart -->
+
     <!--footer-->
-    <footer class="pt-4 my-md-4 pt-md-4 border-top">        
+    <footer class="sticky-footer mt-auto py-3 border-top">        
         <a class="footer-text ml-5 pl-5" href="pages/legal.html" target="_blank">Legal
         </a>            
         <a class="footer-text float-right mr-5 pr-5" href="mailto:contact@orinoco.com">Contact

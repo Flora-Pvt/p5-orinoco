@@ -47,7 +47,7 @@ class UI {
             productsDOM.innerHTML += `
             <article class="card col-12 col-md-6">
                 <header class="card-img-border">
-                    <a class="bag-btn" data-id=${product.id}>
+                    <a href="pages/product.html?image=${product.image}&name=${product.name}&description=${product.description}&price=${product.price}&id=${product.id}">
                         <img class="card-img-top zoom" src=${product.image} alt="teddy bear ${product.name}" />
                     </a>
                 </header>
@@ -56,10 +56,7 @@ class UI {
                         <p class="card-title text-body">
                             ${product.name}
                         </p>
-                    </a>
-                    <p class="card-text">
-                        ${product.description}
-                    </p>                    
+                    </a>                                      
                     <p class="card-text">
                         ${product.price / 100} €
                     </p>
@@ -78,7 +75,7 @@ class UI {
                 //button.innerText = "In Cart";                
                 button.disabled = true;
             }
-            button.addEventListener('click',(even)=>{
+            button.addEventListener('click',(event)=>{
                 //event.target.innerText = "In Cart";                
                 // allow just one of each product in cart
                 event.target.disabled = true;
@@ -119,7 +116,7 @@ class UI {
                 ${item.price / 100} €
             </h5>           
             <!-- item functionality -->
-            <p><span data-id=${item.id}>+</span><span class="item-amount">${item.amount}</span><span data-id=${item.id}>-</span></p>
+            <p><span class="add" data-id=${item.id}>+</span><span class="item-amount">${item.amount}</span><span class="take-off" data-id=${item.id}>-</span></p>
             <span class="remove-item" data-id=${item.id}>remove</span>             
      `;
     cartContent.appendChild(div);    
@@ -148,6 +145,35 @@ class UI {
             this.clearCart();
         });
         // cart functionality
+        cartContent.addEventListener('click', event => {
+            if(event.target.classList.contains('remove-item')) {
+                let removeItem = event.target;
+                let id = removeItem.dataset.id;                
+                cartContent.removeChild(removeItem.parentElement);
+                this.removeItem(id);
+            } else if (event.target.classList.contains("add")) {
+                let addAmount = event.target;
+                let id = addAmount.dataset.id;
+                let tempItem = cart.find(item => item.id === id);
+                tempItem.amount = tempItem.amount + 1;
+                Storage.saveCart(cart);
+                this.setCartValues(cart);
+                addAmount.nextElementSibling.innertText = tempItem.amount;
+            } else if (event.target.classList.contains("take-off")) {
+                let lowerAmount = event.target;
+                let id = lowerAmount.dataset.id;
+                let tempItem = cart.find(item => item.id === id);
+                tempItem.amount = tempItem.amount - 1;                
+                if(tempItem.amount > 0){
+                Storage.saveCart(cart);
+                this.setCartValues(cart);
+                lowerAmount.previousElementSibling.innertText = tempItem.amount;
+                } else {
+                    cartContent.removeChild(lowerAmount.parentElement);
+                    this.removeItem(id);
+                }
+            }
+        });
     }
     clearCart() {
         let cartItems = cart.map(item => item.id);

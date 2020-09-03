@@ -1,5 +1,12 @@
+.sticky-footer {
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+}
+
 .border-top { 
-    border-top: 1px solid #e5e5e5;     
+    border-top: 1px solid #e5e5e5;
+    margin-top: 100px;     
 }
 
 .footer-text {
