@@ -21,6 +21,18 @@ const description = urlParams.get('description');
 const price = urlParams.get('price');
 const id = urlParams.get('id');
 
+class Product {
+    constructor(image, name, description, price, id) {
+        this.image = image;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.id = id;
+    }
+}
+
+let product = new Product(image, name, description, price, id);
+
 // display product
 const productDOM = document.querySelector('.row');
 productDOM.innerHTML += `  
@@ -36,19 +48,32 @@ productDOM.innerHTML += `
             <p>
                 ${price / 100} €
             </p>
-            <button type="button" class="bag-btn btn-block btn-dark py-1" data-id=${id}>
+            <button type="button" class="bag-btn btn-block btn-dark py-2" data-id=${id}>
                 <svg class="text-light bi bi-basket2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z"/>
                         <path fill-rule="evenodd" d="M11.314 1.036a.5.5 0 0 1 .65.278l2 5a.5.5 0 1 1-.928.372l-2-5a.5.5 0 0 1 .278-.65zm-6.628 0a.5.5 0 0 0-.65.278l-2 5a.5.5 0 1 0 .928.372l2-5a.5.5 0 0 0-.278-.65z"/>
                         <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z"/>
                 </svg>                
-                        Add                
+                        ADD                
             </button>
         </section> 
     </article>`;
    
 // local storage
-class Storage {
+const add = document.querySelector('.bag-btn');
+
+add.addEventListener('click', (event) => {
+    //add product to local storage into key 'cart'
+    localStorage.setItem('cart', JSON.stringify(product));
+    //up the number near the cart logo      
+    let keyCart = window.localStorage.key(cart);       
+    
+    cartItems.innerText = keyCart.length;
+    console.log(keyCart);                       
+});
+
+
+/*class Storage {
     static saveProducts(products) {
         localStorage.setItem("products", JSON.stringify(products));
     }
@@ -62,7 +87,7 @@ class Storage {
     static getCart() {
         // check if items exist, if not nothing change
         return localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):[];
-    }
-}
+    } 
+} */
 
 

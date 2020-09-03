@@ -40,8 +40,7 @@ class Products {
 
 // display products
 class UI { 
-    displayProducts(products) {
-        let result = "";
+    displayProducts(products) {        
         products.forEach(product => {
             const productsDOM = document.querySelector('.products-center');
             productsDOM.innerHTML += `
