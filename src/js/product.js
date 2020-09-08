@@ -1,56 +1,15 @@
-// variables 
-const cartBtn = document.querySelector('.cart-btn');
-const closeCartBtn = document.querySelector('.close-cart');
-const clearCartBtn = document.querySelector('.clear-cart');
-const cartDOM = document.querySelector('.cart');
-const cartOverlay = document.querySelector('.cart-overlay');
-const cartItems = document.querySelector('.cart-items');
+/* --- définir les éléments du produit --- */
+const productValues = new URLSearchParams(window.location.search);
 
-// cart
-let cart = [];
+const image = productValues.get('image');
+const name = productValues.get('name');
+const description = productValues.get('description');
+const price = productValues.get('price');
+const id = productValues.get('id');
 
-//buttons
-let buttonsDOM = [];
-
-// getting the products
-class Products {
-    async getProducts() {
-        try {
-            let result = await fetch('http://localhost:3000/api/teddies');
-            // result in json format
-            let products = await result.json(); 
-            // destructuring json 
-            products = products.map(item =>{
-                const name = item.name;
-                const description = item.description;
-                const price = item.price;
-                const image = item.imageUrl;
-                const id = item._id;
-                // return clean objet
-                return {name, description, price, image, id};
-            });           
-            return products;            
-        } catch (error) {
-            console.log(error);
-        }        
-    }
-}
-
-// display products
-class UI { 
-    displayProducts() {        
-        
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-
-            const image = urlParams.get('image');
-            const name = urlParams.get('name');
-            const description = urlParams.get('description');
-            const price = urlParams.get('price');
-            const id = urlParams.get('id');
-
-            const productDOM = document.querySelector('.row');
-            productDOM.innerHTML += `  
+/* --- afficher le produit --- */
+const productDOM = document.querySelector('.row');
+productDOM.innerHTML += `  
         <img class="col-md-8" src=${image} alt="teddy bear ${name}" />           
         
         <section class="col-md-4">
@@ -73,77 +32,52 @@ class UI {
             </button>
         </section> 
     </article>`;
-               
-    }
-    getBagButtons() {
-        const buttons = [...document.querySelectorAll('.bag-btn')];
-        buttonsDOM = buttons;
-        buttons.forEach(button =>{
-            let id = button.dataset.id;
-            let inCart = cart.find(item => item.id === id);
-            if(inCart) {
-                //button.innerText = "In Cart";                
-                button.disabled = true;
-            }
-            button.addEventListener('click',(event)=>{
-                event.target.innerText = "In Cart";                
-                // allow just one of each product in cart
-                event.target.disabled = true;
-                // get product from products
-                let cartItem = {...Storage.getProduct(id),amount:1};                
-                // add product to the cart
-                cart = [...cart,cartItem];                
-                // save cart in local storage
-                Storage.saveCart(cart);                
-                // set cart values
-                this.setCartValues(cart);                                           
-                });            
-        });
-    } 
-    setCartValues(cart){        
-        let itemsTotal = 0;
-        cart.map(item =>{            
-            itemsTotal += item.amount;
-        });        
-        cartItems.innerText = itemsTotal;        
-    }        
-    setupAPP() {
-        cart = Storage.getCart();
-        this.setCartValues(cart); 
-        this.populateCart(cart);          
-    }
-    populateCart(cart) {
-        cart.forEach(item => this.addCartItem(item));
-      }
-}
 
-// local storage
-class Storage {
-    static saveProducts(products) {
-        localStorage.setItem("products", JSON.stringify(products));
+/* --- ajouter au stockage local --- */
+// l'ajout se produira au click sur le bouton ADD
+document.querySelector(".bag-btn").addEventListener('click', function(event) {
+    // le produit est enregistré en objet
+    let product = {
+        id: id,
+        name: name,
+        price: price,
+        image: image,
+        description: description
     }
-    static getProduct(id) {
-        let products = JSON.parse(localStorage.getItem('products'));
-        return products.find(product => product.id === id);
-    }
-    static saveCart(cart) {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    static getCart() {
-        // check if items exist, if not nothing change
-        return localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):[];
-    }
-}
 
-document.addEventListener("DOMContentLoaded", ()=> {
-    const ui = new UI();
-    const products = new Products();
-    // setup app
-    ui.setupAPP();
+    // ajoute une key au stockage local pour le panier
+    const cart = localStorage.getItem('cart');
 
-    // get all products
-    products.getProducts().then(products => {
-    ui.displayProducts(products);
-    Storage.saveProducts(products);
-    });
+    if (cart) {
+        // transforme les données en tableau
+        inCart = JSON.parse(cart);
+        //ajoute le produit au panier 
+        inCart.push(product);
+        // transforme les données en JSON pour les stocker dans le stockage local
+        localStorage.setItem('cart', JSON.stringify(inCart));        
+    } else {
+        // contenu déclaré comme un tableau
+        inCart = [];
+        //ajoute le produit au panier
+        inCart.push(product);
+        // transforme les données en JSON pour les stocker dans le stockage local
+        localStorage.setItem('cart', JSON.stringify(inCart));        
+    }
+    event.target.disabled = true;
+
+    /* --- afficher le nombre de produits dans le panier au click--- */
+    // récupère le nombre de produits dans la key du panier
+    const quantityInCart = JSON.parse(localStorage.getItem('cart')).length; 
+    // affiche le nombre à côté du logo du panier    
+    document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;   
 });
+
+/* --- afficher le nombre de produits dans le panier après chargement de la page --- */
+window.addEventListener("load", function() {
+    // récupère le nombre de produits dans la key du panier
+    const quantityInCart = JSON.parse(localStorage.getItem('cart')).length; 
+    // affiche le nombre à côté du logo du panier  
+    document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;
+})
+
+

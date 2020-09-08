@@ -1,39 +1,39 @@
-// variables 
-const cartBtn = document.querySelector('.cart-btn');
-const cartItems = document.querySelector('.cart-items');
-
-// cart
-let cart = [];
-
-// getting the products
+/* ---  récupérer les produits --- */
 class Products {
     async getProducts() {
         try {
+            // récupère les données des produits à partir du serveur
             let result = await fetch('http://localhost:3000/api/teddies');
-            // result in json format
+            // données au format json
             let products = await result.json();
-            // destructuring json 
+            // définit les valeurs des produits
             products = products.map(item => {
                 const name = item.name;
                 const description = item.description;
                 const price = item.price;
                 const image = item.imageUrl;
                 const id = item._id;
-                // return clean objet
+                // retourne l'objet simplifié
                 return { name, description, price, image, id };
             });
+            //retourne tous les produits
             return products;
+        // affiche une erreur en cas d'exception    
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-// display products
+/* --- afficher les produits --- */
 class UI {
+    // crée une méthode
     displayProducts(products) {
+        // pour chaque produit contenu dans le serveur
         products.forEach(product => {
+            // sélectionne l'endroit où afficher les produits
             const productsDOM = document.querySelector('.products-center');
+            // à cet endroit affiche les données écrites ci-dessous
             productsDOM.innerHTML += `
             <article class="card col-12 col-md-6">
                 <header class="card-img-border">
@@ -54,50 +54,31 @@ class UI {
             </article>
             `;
         });
-    }
-    setCartValues(cart) {
-        let itemsTotal = 0;
-        cart.map(item => {
-            itemsTotal += item.amount;
-        });
-        cartItems.innerText = itemsTotal;
-    }
-    setupAPP() {
-        cart = Storage.getCart();
-        this.setCartValues(cart);
-    }
-}
+    }}
 
 
-
-
-// local storage
-class Storage {
-    static saveProducts(products) {
-        localStorage.setItem("products", JSON.stringify(products));
-    }
-    static getProduct(id) {
-        let products = JSON.parse(localStorage.getItem('products'));
-        return products.find(product => product.id === id);
-    }
-    static saveCart(cart) {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    static getCart() {
-        // check if items exist, if not nothing change
-        return localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
-    }
-}
-
+/* --- déclenchement au chargement du DOM --- */
 document.addEventListener("DOMContentLoaded", () => {
+    // déclare ui comme une nouvelle instance UI
     const ui = new UI();
-    const products = new Products();
-    // setup app
-    ui.setupAPP();
+    // déclare products comme une nouvelle instance Products
+    const products = new Products();    
 
-    // get all products
+    // les produits utilises la méthode getProducts en promesse
     products.getProducts().then(products => {
-        ui.displayProducts(products);
-        Storage.saveProducts(products);
+        // l'instance ui utilise la méthode displayProducts avec les produits en argument
+        ui.displayProducts(products);        
     })
+});
+
+
+/* --- afficher le nombre de produits dans le panier après chargement de la page --- */
+// cart
+let cart = [];
+
+window.addEventListener("load", function() {
+// récupère le nombre de produits dans la key du panier
+const quantityInCart = JSON.parse(localStorage.getItem('cart')).length; 
+// affiche le nombre à côté du logo du panier    
+document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;   
 });
