@@ -20,29 +20,27 @@ function displayProducts() {
             <td class="col-4 price">${products[i].price / 100} €</td>  
          `;
     cartContent.appendChild(row);        
-    } 
-    let board = document.querySelector('table');
-    let total = 0;
-    console.log(board.rows.length);
-
-    for (i = 1; i < board.rows.length; i++) {   
-        total = total + parseInt(board.rows[i].cells[3].innerHTML);
     }
-
-    cartTotal.innerHTML = `${total}`;
+    // déclare le tableau 
+    let board = document.querySelector('table');
+    // déclare le total
+    let total = 0; 
+    // parcoure chaque ligne du tableau
+    for (i = 0; i < board.rows.length; i++) {
+      // ajoute chaque cellule prix au total, cellules analysées et converties en un entier   
+        total = total + parseInt(board.rows[i].cells[2].innerHTML);
+    }
+    // affiche le total dans le html
+    cartTotal.innerHTML = total;
 }
-  
-    
-
+ 
 displayProducts();
 
+/* --- supprimer tous les produits du panier --- */
 clearCartBtn.addEventListener("click", () => {
   localStorage.clear('cart');
   location.reload();
 });
-
-
-
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
 window.addEventListener("load", function () {

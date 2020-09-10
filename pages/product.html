@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="description" content="Orinoco sells teddy bears online.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../dist/css/style.css" />    
+    <link rel="stylesheet" href="../dist/css/style.css" />
 
     <title>Orinoco, teddy bears online</title>
 
@@ -13,56 +13,88 @@
     <meta name="twitter:card" content="Orinoco, choose your teddy bear.">
     <meta name="twitter:title" content="Orinoco">
     <meta name="twitter:description" content="Orinoco sells teddy bears online.">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/Flora-Pvt/p5-orinoco/src/static/images/logo-orinoco-small.png">
+    <meta name="twitter:image"
+        content="https://raw.githubusercontent.com/Flora-Pvt/p5-orinoco/src/static/images/logo-orinoco-small.png">
 
     <!-- Open Graph data -->
     <meta property="og:title" content="Orinoco, choose your teddy bear." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://github.com/Flora-Pvt/p5-orinoco" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/Flora-Pvt/p5-orinoco/src/static/images/logo-orinoco-small.png" />
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/Flora-Pvt/p5-orinoco/src/static/images/logo-orinoco-small.png" />
     <meta property="og:description" content="Orinoco sells teddy bears online." />
     <meta property="og:site_name" content="Orinoco" />
 </head>
 
-<body>   
+<body>
 
     <!-- header -->
     <header class="navbar p-3 px-md-4 pb-4 bg-white border-bottom box-shadow">
         <a class="mx-auto" href="../index.html" aria-label="link to home page">
-            <img src="../src/static/images/logo-orinoco-small.png" alt="Orinoco logo represented by a cart">            
+            <img src="../src/static/images/logo-orinoco-small.png" alt="Orinoco logo represented by a cart">
         </a>
         <a href="cart.html" aria-label="link to cart page">
             <div class="cart-items text-body">
                 0
             </div>
-            <svg class="cart-btn" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-basket2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z"/>
-                <path fill-rule="evenodd" d="M11.314 1.036a.5.5 0 0 1 .65.278l2 5a.5.5 0 1 1-.928.372l-2-5a.5.5 0 0 1 .278-.65zm-6.628 0a.5.5 0 0 0-.65.278l-2 5a.5.5 0 1 0 .928.372l2-5a.5.5 0 0 0-.278-.65z"/>
-                <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z"/>
-            </svg>            
+            <svg class="cart-btn" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-basket2" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z" />
+                <path fill-rule="evenodd"
+                    d="M11.314 1.036a.5.5 0 0 1 .65.278l2 5a.5.5 0 1 1-.928.372l-2-5a.5.5 0 0 1 .278-.65zm-6.628 0a.5.5 0 0 0-.65.278l-2 5a.5.5 0 1 0 .928.372l2-5a.5.5 0 0 0-.278-.65z" />
+                <path
+                    d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z" />
+            </svg>
         </a>
     </header>
 
-    <!-- main --> 
+    <!-- main -->
     <main class="container products">
-        <div class="products-center row align-items-center">
+        <template id="template-product" class="products-center row align-items-center">
             <!-- products -->
-                
+            <img id="img" class="col-md-8" alt="teddy bear" />
+
+            <section class="col-md-4">
+                <h1 id="name">
+
+                </h1>
+                <p id="description">
+
+                </p>
+                <p id="price">
+                    <span> €
+                </p>
+                <button type="button" id="bag-btn" class="btn-block btn-dark py-2" data-id=${id}>
+                    <svg class="text-light bi bi-basket2" width="1em" height="1em" viewBox="0 0 16 16"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z" />
+                        <path fill-rule="evenodd"
+                            d="M11.314 1.036a.5.5 0 0 1 .65.278l2 5a.5.5 0 1 1-.928.372l-2-5a.5.5 0 0 1 .278-.65zm-6.628 0a.5.5 0 0 0-.65.278l-2 5a.5.5 0 1 0 .928.372l2-5a.5.5 0 0 0-.278-.65z" />
+                        <path
+                            d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z" />
+                    </svg>
+                    ADD
+                </button>
+            </section>
+            </article>
             <!-- products -->
-          </div>           
-    </main>    
+        </template>
+    </main>
 
     <!--footer-->
-    <footer class="sticky-footer mt-auto py-3 border-top">        
+    <footer class="mt-auto py-3 border-top">
         <a class="footer-text ml-5 pl-5" href="pages/legal.html" target="_blank">Legal
-        </a>            
-        <a class="footer-text float-right mr-5 pr-5" href="mailto:contact@orinoco.com">Contact
-        </a>          
+        </a>
+        <a class="sticky-footer footer-text float-right mr-5 pr-5" href="mailto:contact@orinoco.com">Contact
+        </a>
     </footer>
 
     <!--scripts-->
-    <!--scripts-->    
-    <script src="../src/js/product.js"></script>    
+    <!--scripts-->
+    <script src="../src/js/product.js"></script>
 
 </body>
+
 </html>

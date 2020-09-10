@@ -44,12 +44,29 @@
     </header>
 
     <!-- main --> 
-    <main class="container products">
-        <div class="products-center row">
+    <main class="container">        
+            <!-- products -->            
+            <template id="template-product" class="row">
+                <article class="card col-md-6">
+                    <header class="card-img-border">
+                        <a id="id">
+                            <img id="img" class="card-img-top zoom" alt="teddy bear" />
+                        </a>
+                    </header>
+                    <section class="card-body text-body">
+                        <a>
+                            <p id="name" class="card-title text-body">
+                                
+                            </p>
+                        </a>                                      
+                        <p class="card-text">
+                            <span id="price"></span> €
+                        </p>
+                    </section> 
+                </article>
+            </template>
             <!-- products -->
-                
-            <!-- products -->
-          </div>           
+                    
     </main>
 
     <!--footer-->
