@@ -1,37 +1,33 @@
 // variables 
-const cartBtn = document.querySelector('.cart-btn');
 const clearCartBtn = document.querySelector('.clear-cart');
-const cartDOM = document.querySelector('.cart');
-const cartOverlay = document.querySelector('.cart-overlay');
-const cartItems = document.querySelector('.cart-items');
 const cartTotal = document.querySelector('.cart-total');
 const cartContent = document.querySelector('.cart-content');
 
+const template = document.getElementById('template-product');   
+
 function displayProducts() { 
-    let products = JSON.parse(localStorage.getItem('cart')); 
-    for (let i in products) {
-        const row = document.createElement('tr');
-        row.classList.add('cart-item');        
-        row.innerHTML += `
-        <td class="col-4">
-          <img src=${products[i].image} class="card-img" alt="teddy bear ${products[i].name}">
-        </td>  
-            <td class="col-4">${products[i].name}</td>
-            <td class="col-4 price">${products[i].price / 100} €</td>  
-         `;
-    cartContent.appendChild(row);        
-    }
-    // déclare le tableau 
-    let board = document.querySelector('table');
+  let products = JSON.parse(localStorage.getItem('cart'));
+  console.log(products); 
+    
+    for (i = 0; i < products.length; i++) {            
+      console.log(products[i].name); 
+      let clone = template.content.cloneNode(true);
+      let img = clone.getElementById('img');
+      img.setAttribute('src', products[i].imageUrl);
+      let name = clone.getElementById('name');
+      let price = clone.getElementById('price');        
+      name.innerHTML = products[i].name; 
+      price.innerHTML += products[i].price / 100;
+      template.parentNode.appendChild(clone);     
+  }
+
     // déclare le total
     let total = 0; 
-    // parcoure chaque ligne du tableau
-    for (i = 0; i < board.rows.length; i++) {
-      // ajoute chaque cellule prix au total, cellules analysées et converties en un entier   
-        total = total + parseInt(board.rows[i].cells[2].innerHTML);
+    for (i = 0; i < products.length; i++) {  
+        total = total + parseInt(products[i].price);
     }
     // affiche le total dans le html
-    cartTotal.innerHTML = total;
+    cartTotal.innerHTML = total / 100;
 }
  
 displayProducts();
@@ -49,5 +45,3 @@ window.addEventListener("load", function () {
   // affiche le nombre à côté du logo du panier    
   document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;
 });
-
-//<p class="item-amount">${amount}</p>
