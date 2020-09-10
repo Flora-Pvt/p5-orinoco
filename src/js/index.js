@@ -38,7 +38,7 @@ function displayProducts(products) {
 makeRequest(url);
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
     // récupère le nombre de produits dans la key du panier
     const quantityInCart = JSON.parse(localStorage.getItem('cart')).length;
     // affiche le nombre à côté du logo du panier    
