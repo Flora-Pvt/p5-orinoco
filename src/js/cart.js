@@ -110,7 +110,7 @@ function displayCart() {
       let orderId = response.orderId; // On récupère l'id de commande présent dans la réponse
       console.log(orderId);		
       localStorage.setItem("orderId", orderId); // On stock dans le localStorage notre id de commande
-    	
+    	window.location.href = "order.html"
 		})
 		.catch(function(error){ // S'il y a eu une erreur
 			alert('error');
