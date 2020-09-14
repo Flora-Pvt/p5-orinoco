@@ -8,19 +8,14 @@ function makeRequest(url) {
     httpRequest.send();
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
-
-            let products = JSON.parse(httpRequest.responseText);
-            console.log(products);
+            let products = JSON.parse(httpRequest.responseText);            
             displayProducts(products);
         }
     }
 }
 
-function displayProducts(products) {
-    console.log('loading ...');
-
-    for (i = 0; i < products.length; i++) {
-        console.log(`${products[i].name}`);
+function displayProducts(products) {   
+    for (i = 0; i < products.length; i++) {        
         let clone = template.content.cloneNode(true);
         let id = clone.getElementById('id');
         let img = clone.getElementById('img');
@@ -38,7 +33,8 @@ function displayProducts(products) {
 makeRequest(url);
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", function (event) {
+    console.log(event);
     // récupère le nombre de produits dans la key du panier
     const quantityInCart = JSON.parse(localStorage.getItem('cart')).length;
     // affiche le nombre à côté du logo du panier    

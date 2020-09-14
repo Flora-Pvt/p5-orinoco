@@ -73,23 +73,51 @@ function displayCart() {
       let data = { contact, products };
 
       // crée la fonction pour envoyer les données au serveur /order
-      function postData() {
+      /*function postData(response) {
         // nouvelle requête Http        
         let request = new XMLHttpRequest();
         // méthode POST pour envoyer les données au serveur
-        request.open("POST", 'http://localhost:3000/api/teddies/order');
+        //request.open("POST", 'http://localhost:3000/api/teddies/order');
         // indique le type de données à envoyer
         request.setRequestHeader("content-type", "application/json");
         // envoie les données au format JSON
         request.send(JSON.stringify(data));
-        console.log(JSON.stringify(data));
-        let loadingNewPage = (function() {
-        document.location.href="order.html";              
-      });      
-      setTimeout(loadingNewPage, 4000);    
-      }
-      postData();
+        console.log(JSON.stringify(data));        
+        console.log(this.orderId);
+        //let loadingNewPage = (function() {
+        //document.location.href="order.html";              
+      //});      
+      //setTimeout(loadingNewPage, 4000);  */  
+      function post() { // Fonction pour envoyer les données au back en asynchrone
+        return new Promise((resolve, reject) => { // La fonction renvoie une promesse pour éviter les callback
+            let request = new XMLHttpRequest(); // On crée un nouvel objet XMLHttpRequest
+            request.open("POST", 'http://localhost:3000/api/teddies/order'); // On initialise la requête en précisant le type et l'url cible
+            request.setRequestHeader("content-type", "application/json"); // On précise ce que l'on envoi
+            request.send(JSON.stringify(data)); // On envoie la requête que l'on stringify
+            request.onreadystatechange = function() { // A chaque changement d'état de la propriété onreadystatechange
+                if (this.readyState === 4) { // Si l'état vaut 4 (=DONE) la requête est terminée
+                    if (this.status === 201) { // On check aussi le status: si il est = 201 -> la requête est un succès et une ressource a été crée
+                        resolve(JSON.parse(this.responseText)); // On resolve donc la promesse en récupérant la réponse, notamment l'id de commande
+                    } else {
+                        reject(request); // Sinon on la rejette et on passe en argument la requête pour éventuellement récupérer les codes erreurs
+                    }
+                }
+            }
+        })
     }
+      post("http://localhost:3000/api/teddies/order", data) // On envoi data au back
+		.then(function(response){ // Si tout s'est bien passé on récupère la réponse du serveur
+      let orderId = response.orderId; // On récupère l'id de commande présent dans la réponse
+      console.log(orderId);		
+      localStorage.setItem("orderId", orderId); // On stock dans le localStorage notre id de commande
+    	
+		})
+		.catch(function(error){ // S'il y a eu une erreur
+			alert('error');
+			});
+      }
+      //postData();
+    //}
   });
 }
 
