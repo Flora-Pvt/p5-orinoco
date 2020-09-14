@@ -51,8 +51,8 @@
 
     <!-- main -->
     <main class="container products">
-        <article>
-            <template id="template-product" class="products-center row align-items-center">
+        <article class="row align-items-center">
+            <template id="template-product">
                 <!-- products -->
                 <img id="img" class="col-md-8" alt="teddy bear" />
 
@@ -63,19 +63,20 @@
                     <p id="description">
 
                     </p>
+                    <p>
+                        <span id="price"></span> €
+                    </p>
                     <select id="colors" class="form-control custom-select" required>
                         <option selected disabled value="">Sélectionnez une couleur</option>
 
                     </select>
-                    <p id="price">
-                        <span> €
-                    </p>
+
 
                 </section>
-        
-        <!-- products -->
-        </template>
-    </article>
+
+                <!-- products -->
+            </template>
+        </article>
         <button type="submit" id="bag-btn" class="btn-block btn-dark py-2">
             <svg class="text-light bi bi-basket2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +90,7 @@
             AJOUTER
         </button>
         <div id="feedback">
-            
+
         </div>
     </main>
 
