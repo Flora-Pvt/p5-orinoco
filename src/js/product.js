@@ -45,30 +45,18 @@ function displayProducts(products) {
 
     /* --- ajouter au stockage local --- */
     
-    // l'ajout se produira au click sur le bouton ADD
+    // l'ajout se produira au clic sur le bouton ADD
     addButton.addEventListener('click', function () {
         // ajoute une key au stockage local pour le panier
         const cart = localStorage.getItem('cart');
         if (cart) {
             console.log(products.name);
             // transforme les données en tableau javascript
-            inCart = JSON.parse(cart);
-            // si le nom du produit n'est pas dans le panier
-
-            //ajoute le produit au panier
-            /*console.log(inCart.length);
-           for (i = 0; i < inCart.length; i++) {
-            console.log(inCart[i].name);
-            if(inCart[i].name !== products.name) {*/
+            inCart = JSON.parse(cart);      
+            //ajoute le produit au panier            
             inCart.push(products);
             // transforme les données en JSON pour les stocker dans le stockage local
-            localStorage.setItem('cart', JSON.stringify(inCart));
-            /* } else {
-                 addButton.disabled = true;
-                 addButton.innerHTML = "Produit déjà ajouté au panier";
-             }
-            }*/
-
+            localStorage.setItem('cart', JSON.stringify(inCart));            
         } else {
             // contenu déclaré comme un tableau
             inCart = [];
@@ -104,12 +92,12 @@ makeRequest(url + productId);
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
 window.addEventListener("load", function (event) {
-    //console.log(event);
+    
     // récupère le nombre de produits dans la key du panier
     const quantityInCart = JSON.parse(localStorage.getItem('cart')).length;
+    console.log(localStorage.getItem('cart'));
     // affiche le nombre à côté du logo du panier
     document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;
-
 });
 
 

@@ -53,9 +53,6 @@ function displayCart() {
     let products = [];
     //ajoute les id des produits du panier au tableau products
     for (i = 0; i < productsInCart.length; i++) {
-      //idObject = {
-      //  _id: productsInCart[i]._id
-      //}
       products.push(productsInCart[i]._id);
     }
 
@@ -79,37 +76,34 @@ function displayCart() {
 
       /* --- crée la fonction pour envoyer les données au serveur /order --- */
 
-      function post() { // Fonction pour envoyer les données au back en asynchrone
-        return new Promise((resolve, reject) => { // La fonction renvoie une promesse pour éviter les callback
-          let request = new XMLHttpRequest(); // On crée un nouvel objet XMLHttpRequest
-          request.open("POST", 'http://localhost:3000/api/teddies/order'); // On initialise la requête en précisant le type et l'url cible
-          request.setRequestHeader("content-type", "application/json"); // On précise ce que l'on envoi
-          request.send(JSON.stringify(data)); // On envoie la requête que l'on stringify
-          request.onreadystatechange = function () { // A chaque changement d'état de la propriété onreadystatechange
-            if (this.readyState === 4) { // Si l'état vaut 4 (=DONE) la requête est terminée
-              if (this.status === 201) { // On check aussi le status: si il est = 201 -> la requête est un succès et une ressource a été crée
-                resolve(JSON.parse(this.responseText)); // On resolve donc la promesse en récupérant la réponse, notamment l'id de commande
+      function post() { 
+        return new Promise((resolve, reject) => { 
+          let request = new XMLHttpRequest(); 
+          request.open("POST", 'http://localhost:3000/api/teddies/order'); 
+          request.setRequestHeader("content-type", "application/json"); 
+          request.send(JSON.stringify(data)); 
+          request.onreadystatechange = function () { 
+            if (this.readyState === 4) { 
+              if (this.status === 201) { 
+                resolve(JSON.parse(this.responseText));
               } else {
-                reject(request); // Sinon on la rejette et on passe en argument la requête pour éventuellement récupérer les codes erreurs
+                reject(request);
               }
             }
           }
         })
       }
-      post("http://localhost:3000/api/teddies/order", data) // On envoi data au back
-        .then(function (response) { // Si tout s'est bien passé on récupère la réponse du serveur
-          let orderId = response.orderId; // On récupère l'id de commande présent dans la réponse
+      post("http://localhost:3000/api/teddies/order", data)
+        .then(function (response) { 
+          let orderId = response.orderId; 
           console.log(orderId);
-          localStorage.setItem("orderId", orderId);
-          // On stock dans le localStorage notre id de commande
+          localStorage.setItem("orderId", orderId);          
           window.location.href = "order.html"
         })
-        .catch(function (error) { // S'il y a eu une erreur
+        .catch(function (error) { 
           alert('error');
         });
-    }
-    //postData();
-    //}
+    }    
   });
 }
 
@@ -122,7 +116,8 @@ clearCartBtn.addEventListener("click", () => {
 });
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
-window.addEventListener("load", function () {
+window.addEventListener("load", function (event) {
+  console.log(event);
   // récupère le nombre de produits dans la key du panier
   const quantityInCart = JSON.parse(localStorage.getItem('cart')).length;
   // affiche le nombre à côté du logo du panier    

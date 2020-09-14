@@ -2,6 +2,8 @@ const url = 'http://localhost:3000/api/teddies/';
 
 const template = document.getElementById('template-product');
 
+let cart = JSON.parse(localStorage.getItem('cart'));
+
 function makeRequest(url) {
     let httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', url);
@@ -16,15 +18,17 @@ function makeRequest(url) {
 
 function displayProducts(products) {   
     for (i = 0; i < products.length; i++) {        
-        let clone = template.content.cloneNode(true);
+        let clone = template.content.cloneNode(true);        
         let id = clone.getElementById('id');
-        let img = clone.getElementById('img');
-
-        id.setAttribute('href', "pages/product.html?id=" + products[i]._id);
-        img.setAttribute('src', products[i].imageUrl);
+        let img = clone.getElementById('img');  
+        let link = clone.getElementById('link');      
         let name = clone.getElementById('name');
         let price = clone.getElementById('price');
-        name.innerHTML = products[i].name;
+        
+        id.setAttribute('href', "pages/product.html?id=" + products[i]._id);
+        img.setAttribute('src', products[i].imageUrl);
+        link.setAttribute('href', "pages/product.html?id=" + products[i]._id);
+        name.innerHTML = products[i].name;        
         price.innerHTML += products[i].price / 100;
         template.parentNode.appendChild(clone);
     }
@@ -33,10 +37,9 @@ function displayProducts(products) {
 makeRequest(url);
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
-window.addEventListener("DOMContentLoaded", function (event) {
-    console.log(event);
+window.addEventListener("load", function () {
     // récupère le nombre de produits dans la key du panier
-    const quantityInCart = JSON.parse(localStorage.getItem('cart')).length;
+    const quantityInCart = cart.length;
     // affiche le nombre à côté du logo du panier    
     document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;
 });
