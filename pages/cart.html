@@ -54,116 +54,98 @@
         <div class="cart">
             <h1 class="text-center cart-title">Panier</h1>
             <div class="row">
-                <table class="cart-content table col-8 mb-3"></table>
-                <template id="template-product">
-
-                    <!-- produits -->
-
-                    <tr>
+                <p id="no-product"></p>
+                <table class="cart-content table col-8 mb-3">
+                <!-- produits -->                
+                <tr id="one-product">
+                    <template id="template-product">
                         <td class="col-1">
                             <img id="img" class="card-img" alt="ours en peluche">
                         </td>
                         <td id="name" class="col-4"></td>
-                        <td class="col-4 price"><span id="price"></span> €</td>
-                    </tr>
-                    <!-- produits -->
-
-                </template>
+                        <td class="col-4 price"><span id="price"></span> </td>
+                    </template>
+                </tr>
+                <!-- produits -->
                 </table>
                 <footer class="cart-footer col-4">
                     <button class="clear-cart btn btn-outline-dark">clear cart</button>
                 </footer>
             </div>
             <!-- formulaire -->
-            <form id="form" class="needs-validation" novalidate method="POST" >
+            <form id="form" class="needs-validation" novalidate method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        <input type="email" class="form-control" id="inputEmail4"
+                            placeholder="Indiquez votre adresse courriel"
+                            pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+">
+                        <div class="invalid-feedback">
+                            Veuillez saisir une donnée valide
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom01">Prénom</label>
-                        <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
-                        <div class="valid-feedback">
-                            Looks good!
+                        <input type="text" class="form-control" id="validationCustom01"
+                            pattern="^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
+                        <div class="invalid-feedback">
+                            Veuillez saisir une donnée valide
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom02">Nom</label>
-                        <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
-                        <div class="valid-feedback">
-                            Looks good!
+                        <input type="text" class="form-control" id="validationCustom02"
+                            pattern="^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
+                        <div class="invalid-feedback">
+                            Veuillez saisir une donnée valide
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Addresse ligne 1</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        <input type="text" class="form-control" id="inputAddress"
+                            pattern="^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$"
+                            placeholder="Appartement/Suite, Numéro de rue, Rue">
+                        <div class="invalid-feedback">
+                            Veuillez saisir une donnée valide
+                        </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress2">Addresse ligne 2</label>
                         <input type="text" class="form-control" id="inputAddress2"
-                            placeholder="Apartment, studio, or floor">
+                            placeholder="Bâtiment, étage, code porte, etc." pattern="^(?:\s*).*(?:\s*)$">
+                        <div class="invalid-feedback">
+                            Veuillez saisir une donnée valide
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom03">Ville</label>
-                        <input type="text" class="form-control" id="validationCustom03" required>
+                        <input type="text" class="form-control" id="validationCustom03" placeholder="Ville, localité"
+                            pattern="^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
                         <div class="invalid-feedback">
-                            Please provide a valid city.
+                            Veuillez saisir une donnée valide
                         </div>
                     </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Pays</label>
-                        <select class="custom-select" id="validationCustom04" required>
-                            <option selected disabled value="">Choose...</option>                            
-                            <optgroup label="Europe">
-                                <option value="france">France</option>
-                                <option value="espagne">Espagne</option>
-                                <option value="italie">Italie</option>
-                                <option value="royaume-uni">Royaume-Uni</option>
-                            </optgroup>
-                            <optgroup label="Amérique">
-                                <option value="canada">Canada</option>
-                                <option value="etats-unis">Etats-Unis</option>
-                            </optgroup>
-                            <optgroup label="Asie">
-                                <option value="chine">Chine</option>
-                                <option value="japon">Japon</option>
-                            </optgroup>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select a valid state.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label for="validationCustom05">Code postal</label>
-                        <input type="text" class="form-control" id="validationCustom05" required>
+                        <input type="text" class="form-control" id="validationCustom05"
+                            placeholder="Indiquez votre code postal. Par exemple 75000" pattern="\d{5}" required>
                         <div class="invalid-feedback">
-                            Please provide a valid zip.
+                            Veuillez saisir une donnée valide
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-check">
-
-
-                        <p>Total : <span class="cart-total">0</span> €</p>
-
-                        <div class="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
-                    </div>
-                </div>
+                <p>Total : <span class="cart-total">0</span> €</p>
                 <button id="order-btn" type="submit" class="btn btn-dark">Terminer l'achat</button>
             </form>
 
-            
-            
+
+
         </div>
 
     </main>

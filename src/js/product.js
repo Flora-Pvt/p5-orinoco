@@ -23,16 +23,25 @@ function makeRequest() {
 
 /* --- afficher le produit --- */
 function displayProducts(products) {
-    console.log(products.name);
+    console.log(products.colors[0]);
 
     let clone = template.content.cloneNode(true);
     let img = clone.getElementById('img');
     img.setAttribute('src', products.imageUrl);
     let name = clone.getElementById('name');
     let description = clone.getElementById('description');
+    let colors = clone.getElementById('colors');
     let price = clone.getElementById('price');
+
     name.innerHTML = products.name;
     description.innerHTML = products.description;
+    for (i = 0; i < products.colors.length; i++) { 
+        console.log(products.colors.length);
+        let color = document.createElement("option");
+        color.setAttribute("value", "color");
+        color.innerHTML = products.colors[i]; 
+        colors.appendChild(color);
+	}    
     price.innerHTML += products.price / 100;
 
     /* --- ajouter au stockage local --- */

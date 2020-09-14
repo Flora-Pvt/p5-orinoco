@@ -14,17 +14,22 @@ const template = document.getElementById('template-product');
 function displayCart() {
   // initialise le panier dans le stockage local
   let productsInCart = JSON.parse(localStorage.getItem('cart'));
+  console.log(localStorage.getItem('cart'));
   // pour chaque produit dans le panier affiche son image, son nom et son prix dans le tableau
-  for (i = 0; i < productsInCart.length; i++) {
-    //console.log(productsInCart[i].name);
-    let clone = template.content.cloneNode(true);
-    let img = clone.getElementById('img');
-    img.setAttribute('src', productsInCart[i].imageUrl);
-    let name = clone.getElementById('name');
-    let price = clone.getElementById('price');
-    name.innerHTML = productsInCart[i].name;
-    price.innerHTML += productsInCart[i].price / 100;
-    template.parentNode.appendChild(clone);
+  if (productsInCart !== null) {
+    for (i = 0; i < productsInCart.length; i++) {      
+      let clone = template.content.cloneNode(true);      
+      let img = clone.getElementById('img');
+      img.setAttribute('src', productsInCart[i].imageUrl);
+      let name = clone.getElementById('name');      
+      let price = clone.getElementById('price');
+      console.log(price);
+      name.innerHTML = productsInCart[i].name;
+      price.innerHTML += productsInCart[i].price / 100 + " €";
+      template.parentNode.appendChild(clone);
+    }
+  } else {    
+    document.getElementById("no-product").innerHTML = "Vous n'avez pas d'ourson dans le panier";    
   }
 
 
@@ -41,7 +46,7 @@ function displayCart() {
   cartTotal.innerHTML = total / 100;
 
 
-  /* --- envoie les id du panier et infos du formulaire au serveur au click sur Terminer l'achat--- */
+  /* --- envoie les id du panier et infos du formulaire au serveur au clic sur Terminer l'achat--- */
 
   orderBtn.addEventListener('click', () => {
     // produits déclaré comme un tableau
@@ -54,7 +59,7 @@ function displayCart() {
       products.push(productsInCart[i]._id);
     }
 
-    //empêche d'ouvrir la page commande au click sur Terminer l'achat
+    //empêche d'ouvrir la page commande au clic sur Terminer l'achat
     formOrder.addEventListener("submit", function (e) {
       e.preventDefault();
     });
@@ -72,51 +77,37 @@ function displayCart() {
       // déclare data comme combinaison de l'objet contact et du tableau products
       let data = { contact, products };
 
-      // crée la fonction pour envoyer les données au serveur /order
-      /*function postData(response) {
-        // nouvelle requête Http        
-        let request = new XMLHttpRequest();
-        // méthode POST pour envoyer les données au serveur
-        //request.open("POST", 'http://localhost:3000/api/teddies/order');
-        // indique le type de données à envoyer
-        request.setRequestHeader("content-type", "application/json");
-        // envoie les données au format JSON
-        request.send(JSON.stringify(data));
-        console.log(JSON.stringify(data));        
-        console.log(this.orderId);
-        //let loadingNewPage = (function() {
-        //document.location.href="order.html";              
-      //});      
-      //setTimeout(loadingNewPage, 4000);  */  
+      /* --- crée la fonction pour envoyer les données au serveur /order --- */
+
       function post() { // Fonction pour envoyer les données au back en asynchrone
         return new Promise((resolve, reject) => { // La fonction renvoie une promesse pour éviter les callback
-            let request = new XMLHttpRequest(); // On crée un nouvel objet XMLHttpRequest
-            request.open("POST", 'http://localhost:3000/api/teddies/order'); // On initialise la requête en précisant le type et l'url cible
-            request.setRequestHeader("content-type", "application/json"); // On précise ce que l'on envoi
-            request.send(JSON.stringify(data)); // On envoie la requête que l'on stringify
-            request.onreadystatechange = function() { // A chaque changement d'état de la propriété onreadystatechange
-                if (this.readyState === 4) { // Si l'état vaut 4 (=DONE) la requête est terminée
-                    if (this.status === 201) { // On check aussi le status: si il est = 201 -> la requête est un succès et une ressource a été crée
-                        resolve(JSON.parse(this.responseText)); // On resolve donc la promesse en récupérant la réponse, notamment l'id de commande
-                    } else {
-                        reject(request); // Sinon on la rejette et on passe en argument la requête pour éventuellement récupérer les codes erreurs
-                    }
-                }
+          let request = new XMLHttpRequest(); // On crée un nouvel objet XMLHttpRequest
+          request.open("POST", 'http://localhost:3000/api/teddies/order'); // On initialise la requête en précisant le type et l'url cible
+          request.setRequestHeader("content-type", "application/json"); // On précise ce que l'on envoi
+          request.send(JSON.stringify(data)); // On envoie la requête que l'on stringify
+          request.onreadystatechange = function () { // A chaque changement d'état de la propriété onreadystatechange
+            if (this.readyState === 4) { // Si l'état vaut 4 (=DONE) la requête est terminée
+              if (this.status === 201) { // On check aussi le status: si il est = 201 -> la requête est un succès et une ressource a été crée
+                resolve(JSON.parse(this.responseText)); // On resolve donc la promesse en récupérant la réponse, notamment l'id de commande
+              } else {
+                reject(request); // Sinon on la rejette et on passe en argument la requête pour éventuellement récupérer les codes erreurs
+              }
             }
+          }
         })
-    }
-      post("http://localhost:3000/api/teddies/order", data) // On envoi data au back
-		.then(function(response){ // Si tout s'est bien passé on récupère la réponse du serveur
-      let orderId = response.orderId; // On récupère l'id de commande présent dans la réponse
-      console.log(orderId);		
-      localStorage.setItem("orderId", orderId); // On stock dans le localStorage notre id de commande
-    	window.location.href = "order.html"
-		})
-		.catch(function(error){ // S'il y a eu une erreur
-			alert('error');
-			});
       }
-      //postData();
+      post("http://localhost:3000/api/teddies/order", data) // On envoi data au back
+        .then(function (response) { // Si tout s'est bien passé on récupère la réponse du serveur
+          let orderId = response.orderId; // On récupère l'id de commande présent dans la réponse
+          console.log(orderId);
+          localStorage.setItem("orderId", orderId); // On stock dans le localStorage notre id de commande
+          window.location.href = "order.html"
+        })
+        .catch(function (error) { // S'il y a eu une erreur
+          alert('error');
+        });
+    }
+    //postData();
     //}
   });
 }
