@@ -57,15 +57,17 @@
                 <p id="no-product"></p>
                 <table class="cart-content table col-8 mb-3">
                 <!-- produits -->                
-                <tr id="one-product">
+                
                     <template id="template-product">
-                        <td class="col-1">
+                        <tr id="one-product"></tr>
+                        <td class="col-2">
                             <img id="img" class="card-img" alt="ours en peluche">
                         </td>
                         <td id="name" class="col-4"></td>
-                        <td class="col-4 price"><span id="price"></span> </td>
+                        <td class="col-4"><span id="price"></span> </td>
+                    </tr>
                     </template>
-                </tr>
+                
                 <!-- produits -->
                 </table>
                 <footer class="cart-footer col-4">
@@ -140,7 +142,7 @@
                         </div>
                     </div>
                 </div>
-                <p>Total : <span class="cart-total">0</span> €</p>
+                <p class="font-weight-bold">Total : <span class="cart-total">0</span> €</p>
                 <button id="order-btn" type="submit" class="btn btn-dark">Terminer l'achat</button>
             </form>
 
