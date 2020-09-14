@@ -8,6 +8,7 @@ const urlParams = new URLSearchParams(queryString);
 const productId = urlParams.get('id');
 
 let addButton = document.getElementById('bag-btn');
+let feedback = document.getElementById('feedback');
 
 /* --- faire une requête à partir de l'id --- */
 function makeRequest() {
@@ -44,19 +45,24 @@ function displayProducts(products) {
     price.innerHTML += products.price / 100;
 
     /* --- ajouter au stockage local --- */
-    
+
     // l'ajout se produira au clic sur le bouton ADD
     addButton.addEventListener('click', function () {
         // ajoute une key au stockage local pour le panier
         const cart = localStorage.getItem('cart');
-        if (cart) {
+        console.log(colors.validity.valid);
+        if(cart && colors.validity.valid === true) {
             console.log(products.name);
             // transforme les données en tableau javascript
-            inCart = JSON.parse(cart);      
+            inCart = JSON.parse(cart);
             //ajoute le produit au panier            
             inCart.push(products);
             // transforme les données en JSON pour les stocker dans le stockage local
-            localStorage.setItem('cart', JSON.stringify(inCart));            
+            localStorage.setItem('cart', JSON.stringify(inCart));
+            feedback.innerHTML = "Produit ajouté au panier";
+        } else if(colors.validity.valid === false) {            
+            feedback.innerHTML = "Veuillez choisir une couleur"; 
+            prevent.default;
         } else {
             // contenu déclaré comme un tableau
             inCart = [];
@@ -64,6 +70,7 @@ function displayProducts(products) {
             inCart.push(products);
             // transforme les données en JSON pour les stocker dans le stockage local
             localStorage.setItem('cart', JSON.stringify(inCart));
+            feedback.innerHTML = "Produit ajouté au panier";
         }
         event.target.disabled = true;
 
@@ -78,26 +85,26 @@ function displayProducts(products) {
 
 function disabledButton(products) {
     const cart = localStorage.getItem('cart');
-    inCart = JSON.parse(cart);
+    inCart = JSON.parse(cart);    
     for (i = 0; i < inCart.length; i++) {
         console.log(inCart[i].name);
         if (inCart[i].name == products.name) {
             addButton.disabled = true;
-            addButton.innerHTML = "Produit déjà ajouté au panier";
+            feedback.innerHTML = "Produit ajouté au panier";
         }
     }
 }
+
 
 makeRequest(url + productId);
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
 window.addEventListener("load", function (event) {
-    
+
     // récupère le nombre de produits dans la key du panier
     const quantityInCart = JSON.parse(localStorage.getItem('cart')).length;
     console.log(localStorage.getItem('cart'));
     // affiche le nombre à côté du logo du panier
     document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;
 });
-
 
