@@ -44,8 +44,8 @@ function displayCart() {
   }
   // affiche le total dans le html
   cartTotal.innerHTML = total / 100;
-
-
+  localStorage.setItem("total", total);
+ 
   /* --- envoie les id du panier et infos du formulaire au serveur au clic sur Terminer l'achat--- */
 
   orderBtn.addEventListener('click', () => {
@@ -100,7 +100,8 @@ function displayCart() {
         .then(function (response) { // Si tout s'est bien passé on récupère la réponse du serveur
           let orderId = response.orderId; // On récupère l'id de commande présent dans la réponse
           console.log(orderId);
-          localStorage.setItem("orderId", orderId); // On stock dans le localStorage notre id de commande
+          localStorage.setItem("orderId", orderId);
+          // On stock dans le localStorage notre id de commande
           window.location.href = "order.html"
         })
         .catch(function (error) { // S'il y a eu une erreur
