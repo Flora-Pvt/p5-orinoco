@@ -18,8 +18,7 @@ function makeRequest() {
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
             let products = JSON.parse(httpRequest.responseText);
-            displayProducts(products);
-            disabledButton(products);
+            displayProducts(products);            
         }
     }
 }
@@ -48,31 +47,51 @@ function displayProducts(products) {
 
     // l'ajout se produira au clic sur le bouton ADD
     addButton.addEventListener('click', function () {
+        let quantity = document.getElementById('quantity');
+
         // ajoute une key au stockage local pour le panier
         const cart = localStorage.getItem('cart');
-        console.log(colors.validity.valid);
-        if(cart && colors.validity.valid === true) {
-            console.log(products.name);
-            // transforme les données en tableau javascript
+        if (cart && colors.validity.valid === true) {
             inCart = JSON.parse(cart);
-            //ajoute le produit au panier            
-            inCart.push(products);
-            // transforme les données en JSON pour les stocker dans le stockage local
-            localStorage.setItem('cart', JSON.stringify(inCart));
-            feedback.innerHTML = "Produit ajouté au panier";
-        } else if(colors.validity.valid === false) {            
-            feedback.innerHTML = "Veuillez choisir une couleur"; 
-            prevent.default;
+            let isPresent = inCart.some(p => p._id == productId);
+            console.log(isPresent);
+            if (isPresent) {
+                console.log("ajoute une quantité");
+                let ourProduct = inCart.filter(p => p._id == productId);
+                ourProduct[0].number++;
+                let newCart = inCart.filter(p => p._id != productId);
+                newCart.push(ourProduct[0]);
+                localStorage.setItem("cart", JSON.stringify(newCart));
+                quantity.innerHTML = ourProduct[0].number;
+                feedback.innerHTML = "produit ajouté au panier";
+            } else {
+                // transforme les données en tableau javascript
+                console.log("ajoute le produit une première fois");
+                //inCart = JSON.parse(cart);
+                products.number = 1;
+                //ajoute le produit au panier            
+                inCart.push(products);
+                // transforme les données en JSON pour les stocker dans le stockage local
+                localStorage.setItem('cart', JSON.stringify(inCart));
+                quantity.innerHTML = products.number;
+                feedback.innerHTML = "produit ajouté au panier";
+            }
+        } else if (colors.validity.valid === false) {
+            feedback.innerHTML = "Veuillez choisir une couleur";
         } else {
+            console.log("tout premier ajout");
             // contenu déclaré comme un tableau
             inCart = [];
+            products.number = 1;
             //ajoute le produit au panier
             inCart.push(products);
             // transforme les données en JSON pour les stocker dans le stockage local
             localStorage.setItem('cart', JSON.stringify(inCart));
-            feedback.innerHTML = "Produit ajouté au panier";
+
+            quantity.innerHTML = products.number;
+            feedback.innerHTML = "produit ajouté au panier";
         }
-        event.target.disabled = true;
+        //event.target.disabled = true;
 
         /* --- afficher le nombre de produits dans le panier au click--- */
         // récupère le nombre de produits dans la key du panier
@@ -83,28 +102,15 @@ function displayProducts(products) {
     template.parentNode.appendChild(clone);
 }
 
-function disabledButton(products) {
-    const cart = localStorage.getItem('cart');
-    inCart = JSON.parse(cart);    
-    for (i = 0; i < inCart.length; i++) {
-        console.log(inCart[i].name);
-        if (inCart[i].name == products.name) {
-            addButton.disabled = true;
-            feedback.innerHTML = "Produit ajouté au panier";
-        }
-    }
-}
-
-
 makeRequest(url + productId);
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
-window.addEventListener("load", function (event) {
-
-    // récupère le nombre de produits dans la key du panier
-    const quantityInCart = JSON.parse(localStorage.getItem('cart')).length;
-    console.log(localStorage.getItem('cart'));
-    // affiche le nombre à côté du logo du panier
-    document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;
+window.addEventListener("load", function () {
+    let inCart = JSON.parse(localStorage.getItem('cart'));  
+    let quantityInCart = 0;
+    for (i = 0; i < inCart.length; i++) {        
+        quantityInCart += inCart[i].number;        
+    }
+    document.querySelector('.cart-items').innerHTML = quantityInCart;
 });
 

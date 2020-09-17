@@ -56,19 +56,29 @@
             <div class="row">
                 <p id="no-product"></p>
                 <table class="cart-content table col-8 mb-3">
-                <!-- produits -->                
-                
+                    <!-- produits -->
+
                     <template id="template-product">
-                        <tr id="one-product"></tr>
-                        <td class="col-2">
-                            <img id="img" class="card-img" alt="ours en peluche">
-                        </td>
-                        <td id="name" class="col-4"></td>
-                        <td class="col-4"><span id="price"></span> </td>
-                    </tr>
+                        <tr class="row">
+                            <td class="col-2">
+                                <img id="img" class="card-img" alt="ours en peluche">
+                            </td>
+                            <td id="name" class="col-3">
+
+                            </td>
+                            <td class="col-4">
+                                <button id="" class="btn btn-outline-dark mr-4"> - </button>
+                                <span id="quantity"></span>
+                                <button id="" class="btn btn-outline-dark ml-4"> + </button>
+
+                            </td>
+                            <td class="col-3" id="price">
+
+                            </td>
+                        </tr>
                     </template>
-                
-                <!-- produits -->
+
+                    <!-- produits -->
                 </table>
                 <footer class="cart-footer col-4">
                     <button class="clear-cart btn btn-outline-dark">clear cart</button>

@@ -21,10 +21,12 @@ function displayCart() {
       let clone = template.content.cloneNode(true);      
       let img = clone.getElementById('img');
       img.setAttribute('src', productsInCart[i].imageUrl);
-      let name = clone.getElementById('name');      
+      let name = clone.getElementById('name');
+      let quantity = clone.getElementById('quantity');            
       let price = clone.getElementById('price');
-      console.log(price);
+      
       name.innerHTML = productsInCart[i].name;
+      quantity.innerHTML = productsInCart[i].number;
       price.innerHTML += productsInCart[i].price / 100 + " €";
       template.parentNode.appendChild(clone);
     }
@@ -39,8 +41,8 @@ function displayCart() {
   let total = 0;
   // pour chaque produit dans le panier...
   for (i = 0; i < productsInCart.length; i++) {
-    // ...ajoute le prix au total déclaré
-    total = total + parseInt(productsInCart[i].price);
+    // ...ajoute le prix au total déclaré   
+    total = total + parseInt(productsInCart[i].price * productsInCart[i].number);
   }
   // affiche le total dans le html
   cartTotal.innerHTML = total / 100;
@@ -100,7 +102,7 @@ function displayCart() {
           localStorage.setItem("orderId", orderId);          
           window.location.href = "order.html"
         })
-        .catch(function (error) { 
+        .catch(function () { 
           alert('error');
         });
     }    
@@ -116,12 +118,13 @@ clearCartBtn.addEventListener("click", () => {
 });
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
-window.addEventListener("load", function (event) {
-  console.log(event);
-  // récupère le nombre de produits dans la key du panier
-  const quantityInCart = JSON.parse(localStorage.getItem('cart')).length;
-  // affiche le nombre à côté du logo du panier    
-  document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;
+window.addEventListener("load", function () {
+  let inCart = JSON.parse(localStorage.getItem('cart'));  
+  let quantityInCart = 0;
+  for (i = 0; i < inCart.length; i++) {        
+      quantityInCart += inCart[i].number;        
+  }
+  document.querySelector('.cart-items').innerHTML = quantityInCart;
 });
 
 /* --- affiche les aides pour le formulaire --- */

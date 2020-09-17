@@ -38,9 +38,11 @@ makeRequest(url);
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
 window.addEventListener("load", function () {
-    // récupère le nombre de produits dans la key du panier
-    const quantityInCart = cart.length;
-    // affiche le nombre à côté du logo du panier    
-    document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;
+    let inCart = JSON.parse(localStorage.getItem('cart'));  
+    let quantityInCart = 0;
+    for (i = 0; i < inCart.length; i++) {        
+        quantityInCart += inCart[i].number;        
+    }
+    document.querySelector('.cart-items').innerHTML = quantityInCart;
 });
 
