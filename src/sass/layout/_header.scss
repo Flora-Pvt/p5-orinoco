@@ -1,11 +1,17 @@
 .navbar {
     margin-bottom: 100px;
+    &-img {
+        @media screen and (max-width: 599px) {
+            width: 50%;
+            height: 50%;            
+        }
+    }    
 }
 
-.cart-items {
-    float: right;    
+.cart-items {    
     font-size: 1.2em;
-    font-weight: bold;
+    font-weight: bold; 
+    text-decoration: none;   
 }
 
 svg {
