@@ -22,6 +22,8 @@ function displayCart() {
       let img = clone.getElementById('img');
       img.setAttribute('src', productsInCart[i].imageUrl);
       let name = clone.getElementById('name');
+      let productPrice = clone.getElementById('product-price');
+      let reference = clone.getElementById('reference');
       let quantity = clone.getElementById('quantity');
       let price = clone.getElementById('price');
       let removeBtn = clone.getElementById('remove');
@@ -30,35 +32,45 @@ function displayCart() {
 
       removeBtn.dataset.id = productsInCart[i]._id;
       name.innerHTML = productsInCart[i].name;
+      productPrice.innerHTML = productsInCart[i].price / 100 + " €";
+      reference.innerHTML += productsInCart[i]._id;
       quantity.innerHTML = productsInCart[i].number;
       price.innerHTML += (productsInCart[i].number * productsInCart[i].price) / 100 + " €";
       template.parentNode.appendChild(clone);
 
       removeBtn.addEventListener("click", () => {
         console.log("enlève une quantité");
-        let id = removeBtn.dataset.id;
-        let ourProduct = productsInCart.filter(p => p._id == id);
-        ourProduct[0].number--;
-        let newCart = productsInCart.filter(p => p._id != id);
-        newCart.push(ourProduct[0]);
-        localStorage.setItem("cart", JSON.stringify(newCart));
-        quantity.innerHTML = ourProduct[0].number;
-        price.innerHTML = (ourProduct[0].number * ourProduct[0].price) / 100 + " €";
-        let total = 0;
-        // pour chaque produit dans le panier...
-        for (i = 0; i < productsInCart.length; i++) {
-          // ...ajoute le prix au total déclaré   
-          total = total + parseInt(productsInCart[i].number * productsInCart[i].price);
+        let idBtn = removeBtn.dataset.id;
+        let ourProduct = productsInCart.filter(p => p._id == idBtn);
+        if (ourProduct[0].number > 1) {
+          ourProduct[0].number--;
+          let newCart = productsInCart.filter(p => p._id != idBtn);
+          newCart.push(ourProduct[0]);
+          localStorage.setItem("cart", JSON.stringify(newCart));
+          quantity.innerHTML = ourProduct[0].number;
+          price.innerHTML = (ourProduct[0].number * ourProduct[0].price) / 100 + " €";
+          let total = 0;
+          // pour chaque produit dans le panier...
+          for (i = 0; i < productsInCart.length; i++) {
+            // ...ajoute le prix au total déclaré   
+            total = total + parseInt(productsInCart[i].number * productsInCart[i].price);
+          }
+          cartTotal.innerHTML = total / 100;
+          localStorage.setItem("total", total);
+          let inCart = JSON.parse(localStorage.getItem('cart'));
+          let quantityInCart = 0;
+          for (i = 0; i < inCart.length; i++) {
+            quantityInCart += inCart[i].number;
+          }
+          document.querySelector('.cart-items').innerHTML = quantityInCart;
         }
-        cartTotal.innerHTML = total / 100;
-        localStorage.setItem("total", total);
       })
       addBtn.addEventListener("click", () => {
         console.log("ajoute une quantité");
-        let id = removeBtn.dataset.id;
-        let ourProduct = productsInCart.filter(p => p._id == id);
+        let idBtn = removeBtn.dataset.id;
+        let ourProduct = productsInCart.filter(p => p._id == idBtn);
         ourProduct[0].number++;
-        let newCart = productsInCart.filter(p => p._id != id);
+        let newCart = productsInCart.filter(p => p._id != idBtn);
         newCart.push(ourProduct[0]);
         localStorage.setItem("cart", JSON.stringify(newCart));
         quantity.innerHTML = ourProduct[0].number;
@@ -71,17 +83,24 @@ function displayCart() {
         }
         cartTotal.innerHTML = total / 100;
         localStorage.setItem("total", total);
+        let inCart = JSON.parse(localStorage.getItem('cart'));
+        let quantityInCart = 0;
+        for (i = 0; i < inCart.length; i++) {
+          quantityInCart += inCart[i].number;
+        }
+        document.querySelector('.cart-items').innerHTML = quantityInCart;
       })
       clearBtn.addEventListener("click", () => {
         console.log("supprime le produit");
-        let id = removeBtn.dataset.id;
-        let newCart = productsInCart.filter(p => p._id != id);        
-        localStorage.setItem("cart", JSON.stringify(newCart));        
+        let idBtn = removeBtn.dataset.id;
+        let newCart = productsInCart.filter(p => p._id != idBtn);
+        localStorage.setItem("cart", JSON.stringify(newCart));
         location.reload();
       })
     }
   } else {
     document.getElementById("no-product").innerHTML = "Vous n'avez pas d'ourson dans le panier";
+    orderBtn.disabled = true;
   }
 
 
@@ -160,12 +179,6 @@ function displayCart() {
 }
 
 displayCart();
-
-/* --- bouton pour supprimer tous les produits du panier --- */
-clearCartBtn.addEventListener("click", () => {
-  localStorage.clear('cart');
-  location.reload();
-});
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
 window.addEventListener("load", function () {
