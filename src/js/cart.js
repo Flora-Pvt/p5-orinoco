@@ -27,7 +27,7 @@ function displayCart() {
       
       name.innerHTML = productsInCart[i].name;
       quantity.innerHTML = productsInCart[i].number;
-      price.innerHTML += productsInCart[i].price / 100 + " €";
+      price.innerHTML += (productsInCart[i].number * productsInCart[i].price) / 100 + " €";
       template.parentNode.appendChild(clone);
     }
   } else {    
@@ -42,7 +42,7 @@ function displayCart() {
   // pour chaque produit dans le panier...
   for (i = 0; i < productsInCart.length; i++) {
     // ...ajoute le prix au total déclaré   
-    total = total + parseInt(productsInCart[i].price * productsInCart[i].number);
+    total = total + parseInt(productsInCart[i].number * productsInCart[i].price);
   }
   // affiche le total dans le html
   cartTotal.innerHTML = total / 100;

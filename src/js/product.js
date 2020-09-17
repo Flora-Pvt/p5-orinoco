@@ -18,7 +18,7 @@ function makeRequest() {
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
             let products = JSON.parse(httpRequest.responseText);
-            displayProducts(products);            
+            displayProducts(products);
         }
     }
 }
@@ -94,10 +94,12 @@ function displayProducts(products) {
         //event.target.disabled = true;
 
         /* --- afficher le nombre de produits dans le panier au click--- */
-        // récupère le nombre de produits dans la key du panier
-        const quantityInCart = JSON.parse(localStorage.getItem('cart')).length;
-        // affiche le nombre à côté du logo du panier
-        document.querySelector('.cart-items').innerHTML = `${quantityInCart}`;
+        
+        let quantityInCart = 0;
+        for (i = 0; i < inCart.length; i++) {
+            quantityInCart += inCart[i].number;
+        }
+        document.querySelector('.cart-items').innerHTML = quantityInCart;
     });
     template.parentNode.appendChild(clone);
 }
@@ -106,10 +108,10 @@ makeRequest(url + productId);
 
 /* --- afficher le nombre de produits dans le panier après chargement de la page --- */
 window.addEventListener("load", function () {
-    let inCart = JSON.parse(localStorage.getItem('cart'));  
+    let inCart = JSON.parse(localStorage.getItem('cart'));
     let quantityInCart = 0;
-    for (i = 0; i < inCart.length; i++) {        
-        quantityInCart += inCart[i].number;        
+    for (i = 0; i < inCart.length; i++) {
+        quantityInCart += inCart[i].number;
     }
     document.querySelector('.cart-items').innerHTML = quantityInCart;
 });
