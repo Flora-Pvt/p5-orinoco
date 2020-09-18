@@ -29,14 +29,11 @@
 <body>
 
     <!-- header -->
-    <header class="navbar p-3 px-md-4 pb-4 bg-white border-bottom box-shadow">
-        <a class="mx-auto" href="../index.html" aria-label="lien vers la page d'accueil">
-            <img src="../src/static/images/logo-orinoco-small.png" alt="logo Orinoco représenté par un caddie">
+    <header class="navbar bg-white border-bottom box-shadow">
+        <a class="mx-auto" href="../index.html" aria-label="lien pour aller à la page d'accueil">
+            <img class="navbar-img" src="../src/static/images/logo-orinoco-small.png" alt="logo Orinoco représenté par un caddie">
         </a>
-        <a href="cart.html" aria-label="lien vers le panier">
-            <div class="cart-items text-body">
-                0
-            </div>
+        <a class="row float-right" href="cart.html" aria-label="lien pour aller au panier">
             <svg class="cart-btn" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-basket2" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
@@ -46,6 +43,9 @@
                 <path
                     d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z" />
             </svg>
+            <div class="cart-items text-body font-weight-bold pr-3">
+                0
+            </div>
         </a>
     </header>
 
@@ -54,7 +54,7 @@
         <article class="row align-items-center">
             <template id="template-product">
                 <!-- products -->
-                <img id="img" class="col-md-8" alt="teddy bear" />
+                <img id="img" class="col-md-8 img-fluid" alt="teddy bear" />
 
                 <section class="col-md-4">
                     <h1 id="name">
@@ -96,14 +96,13 @@
     </main>
 
     <!--footer-->
-    <footer class="py-3 border-top sticky-footer">
-        <a class="footer-text ml-5 pl-5" href="pages/legal.html" target="_blank">Mentions légales
+    <footer class="border-top p-3 sticky-footer d-flex justify-content-between">
+        <a class="footer-text" href="legal.html" target="_blank">Mentions légales
         </a>
-        <a class="footer-text float-right mr-5 pr-5" href="mailto:contact@orinoco.com">Contact
+        <a class="footer-text" href="mailto:contact@orinoco.com">Contact
         </a>
     </footer>
-
-    <!--scripts-->
+    
     <!--scripts-->
     <script src="../src/js/product.js"></script>
 

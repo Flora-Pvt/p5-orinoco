@@ -27,19 +27,23 @@
 <body>   
 
     <!-- header -->
-    <header class="navbar p-3 px-md-4 pb-4 bg-white border-bottom box-shadow">
-        <a href="../index.html" aria-label="lien vers la page d'accueil">
-            <img src="../src/static/images/logo-orinoco-small.png" alt="logo Orinoco représenté par un caddie">            
+    <header class="navbar bg-white border-bottom box-shadow">
+        <a class="mx-auto" href="../index.html" aria-label="lien pour aller à la page d'accueil">
+            <img class="navbar-img" src="../src/static/images/logo-orinoco-small.png" alt="logo Orinoco représenté par un caddie">
         </a>
-        <a class="float-right" href="cart.html" aria-label="lien vers le panier">
-            <div class="cart-items text-body">
+        <a class="row float-right" href="cart.html" aria-label="lien pour aller au panier">
+            <svg class="cart-btn" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-basket2" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z" />
+                <path fill-rule="evenodd"
+                    d="M11.314 1.036a.5.5 0 0 1 .65.278l2 5a.5.5 0 1 1-.928.372l-2-5a.5.5 0 0 1 .278-.65zm-6.628 0a.5.5 0 0 0-.65.278l-2 5a.5.5 0 1 0 .928.372l2-5a.5.5 0 0 0-.278-.65z" />
+                <path
+                    d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z" />
+            </svg>
+            <div class="cart-items text-body font-weight-bold pr-3">
                 0
             </div>
-            <svg width="2em" height="2em" viewBox="0 0 16 16" class="cart-btn bi bi-basket2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z"/>
-                <path fill-rule="evenodd" d="M11.314 1.036a.5.5 0 0 1 .65.278l2 5a.5.5 0 1 1-.928.372l-2-5a.5.5 0 0 1 .278-.65zm-6.628 0a.5.5 0 0 0-.65.278l-2 5a.5.5 0 1 0 .928.372l2-5a.5.5 0 0 0-.278-.65z"/>
-                <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z"/>
-            </svg>            
         </a>
     </header>
 
@@ -54,11 +58,11 @@
     </main>
 
     <!--footer-->
-    <footer class="pt-4 my-md-4 pt-md-4 border-top sticky-footer">        
-        <a class="footer-text ml-5 pl-5" href="pages/legal.html" target="_blank">Mentions légales
-        </a>            
-        <a class="footer-text float-right mr-5 pr-5" href="mailto:contact@orinoco.com">Contact
-        </a>          
+    <footer class="border-top p-3 sticky-footer2 d-flex justify-content-between">
+        <a class="footer-text" href="legal.html" target="_blank">Mentions légales
+        </a>
+        <a class="footer-text" href="mailto:contact@orinoco.com">Contact
+        </a>
     </footer>
 
     <!--scripts-->

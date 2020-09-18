@@ -29,15 +29,13 @@
 <body>
 
     <!-- header -->
-    <header class="navbar p-3 px-md-4 pb-4 bg-white border-bottom box-shadow">
+    <header class="navbar bg-white border-bottom box-shadow">
         <a class="mx-auto" href="../index.html" aria-label="lien pour aller à la page d'accueil">
-            <img src="../src/static/images/logo-orinoco-small.png" alt="logo Orinoco représenté par un caddie">
+            <img class="navbar-img" src="../src/static/images/logo-orinoco-small.png"
+                alt="logo Orinoco représenté par un caddie">
         </a>
-        <a href="cart.html" aria-label="lien pour aller à la page panier">
-            <div class="cart-items text-body">
-                0
-            </div>
-            <svg width="2em" height="2em" viewBox="0 0 16 16" class="cart-btn bi bi-basket2" fill="currentColor"
+        <a class="row float-right" href="cart.html" aria-label="lien pour aller au panier">
+            <svg class="cart-btn" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-basket2" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                     d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z" />
@@ -46,118 +44,122 @@
                 <path
                     d="M4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zM0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z" />
             </svg>
+            <div class="cart-items text-body font-weight-bold pr-3">
+                0
+            </div>
         </a>
     </header>
 
     <!-- cart -->
-    <main class="container cart-overlay">
-        <div class="cart">
+    <main class="container">
+        <section class="cart">
             <h1 class="text-center cart-title">Panier</h1>
             <div class="row">
-                <p id="no-product"></p>
-                <table class="cart-content table col-6 mb-3">
+                <p id="no-product" class="font-weight-bold"></p>
+                <table class="table col-lg-6 mb-3">
                     <!-- produits -->
 
                     <template id="template-product">
-                        <tr class="row">
-                            <td class="col-2">
+                        <tr>
+                            <td class="cart-img">
                                 <img id="img" class="card-img" alt="ours en peluche">
                             </td>
-                            <td class="col-8">
+                            <td>
                                 <p id="name" class="font-weight-bold mb-0"></p>
                                 <p id="product-price" class="font-weight-bold mb-1"></p>
                                 <ul class="row">
                                     <li id="reference">Référence : </li>
-                                    <li">Total : <span id="price"></span></li>
+                                    <li>Total : <span id="price"></span></li>
                                 </ul>
-                                <button id="remove" class="btn btn-light mr-4"> - </button>
-                                <span id="quantity"></span>
-                                <button id="add" class="btn btn-light ml-4"> + </button>
-
+                                <div class="row">
+                                    <button id="remove" class="btn btn-light mr-lg-3"> - </button>
+                                    <span id="quantity"></span>
+                                    <button id="add" class="btn btn-light ml-lg-3"> + </button>
+                                </div>
                             </td>
-                            <td class="col-1">
-                                <button id="clear" class="btn btn-light ml-4"> x </button>
+                            <td>
+                                <button id="clear" class="btn btn-light"> x </button>
                             </td>
                         </tr>
                     </template>
 
                     <!-- produits -->
                 </table>
-                <form id="form" class="needs-validation col-6" novalidate method="POST">
+                <form id="form" class="needs-validation col-lg-6" novalidate method="POST">
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <section class="form-group col-11 col-lg-6">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email"
                                 placeholder="Indiquez votre adresse courriel"
                                 pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+">
-                            <div class="invalid-feedback">
+                            <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
-                            </div>
-                        </div>
+                            </footer>
+                        </section>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <section class="col-11 col-lg-6 mb-3">
                             <label for="prénom">Prénom</label>
                             <input type="text" class="form-control" id="prénom"
                                 pattern="^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
-                            <div class="invalid-feedback">
+                            <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
+                            </footer>
+                        </section>
+                        <section class="col-11 col-lg-6 mb-3">
                             <label for="nom">Nom</label>
                             <input type="text" class="form-control" id="nom"
                                 pattern="^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
-                            <div class="invalid-feedback">
+                            <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
-                            </div>
-                        </div>
+                            </footer>
+                        </section>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <section class="form-group col-11 col-lg-6">
                             <label for="addresse">Addresse ligne 1</label>
                             <input type="text" class="form-control" id="adresse"
                                 placeholder="Appartement/Suite, Numéro de rue, Rue">
-                        </div>
-                        <div class="form-group col-md-6">
+                        </section>
+                        <section class="form-group col-11 col-lg-6">
                             <label for="adresse2">Addresse ligne 2</label>
                             <input type="text" class="form-control" id="adresse2"
                                 placeholder="Bâtiment, étage, code porte, etc.">
-                        </div>
+                        </section>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <section class="col-11 col-lg-6 mb-3">
                             <label for="ville">Ville</label>
                             <input type="text" class="form-control" id="ville" placeholder="Ville, localité"
                                 pattern="^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
-                            <div class="invalid-feedback">
+                            <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
+                            </footer>
+                        </section>
+                        <section class="col-11 col-lg-6 mb-3">
                             <label for="code-postal">Code postal</label>
                             <input type="text" class="form-control" id="code-postal"
                                 placeholder="Indiquez votre code postal. Par exemple 75000" pattern="\d{5}" required>
-                            <div class="invalid-feedback">
+                            <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
-                            </div>
-                        </div>
+                            </footer>
+                        </section>
                     </div>
                     <p class="font-weight-bold">Total : <span class="cart-total">0</span> €</p>
                     <button id="order-btn" type="submit" class="btn btn-dark">Terminer l'achat</button>
                 </form>
             </div>
             <!-- formulaire -->
-        </div>
+        </section>
 
     </main>
     <!-- end of cart -->
 
     <!--footer-->
-    <footer class="py-3 border-top sticky-footer">
-        <a class="footer-text ml-5 pl-5" href="pages/legal.html" target="_blank">Mentions légales
+    <footer class="border-top p-3 sticky-footer d-flex justify-content-between">
+        <a class="footer-text" href="legal.html" target="_blank">Mentions légales
         </a>
-        <a class="footer-text float-right mr-5 pr-5" href="mailto:contact@orinoco.com">Contact
+        <a class="footer-text" href="mailto:contact@orinoco.com">Contact
         </a>
     </footer>
 

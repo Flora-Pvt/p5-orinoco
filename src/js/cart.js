@@ -14,9 +14,12 @@ const template = document.getElementById('template-product');
 function displayCart() {
   // initialise le panier dans le stockage local
   let productsInCart = JSON.parse(localStorage.getItem('cart'));
-  console.log(localStorage.getItem('cart'));
+  console.log(productsInCart == null);
   // pour chaque produit dans le panier affiche son image, son nom et son prix dans le tableau
-  if (productsInCart !== null) {
+  if (productsInCart == null || productsInCart.length == 0) {
+    document.getElementById("no-product").innerHTML = "Vous n'avez pas d'ourson dans le panier.";
+    orderBtn.disabled = true;
+  } else {
     for (i = 0; i < productsInCart.length; i++) {
       let clone = template.content.cloneNode(true);
       let img = clone.getElementById('img');
@@ -98,9 +101,6 @@ function displayCart() {
         location.reload();
       })
     }
-  } else {
-    document.getElementById("no-product").innerHTML = "Vous n'avez pas d'ourson dans le panier";
-    orderBtn.disabled = true;
   }
 
 

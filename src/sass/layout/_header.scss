@@ -1,5 +1,5 @@
 .navbar {
-    margin-bottom: 100px;
+    margin-bottom: 70px;
     &-img {
         @media screen and (max-width: 599px) {
             width: 50%;
@@ -8,10 +8,16 @@
     }    
 }
 
+.float-right {
+@media screen and (max-width: 320px) {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+}
+}
+
 .cart-items {    
-    font-size: 1.2em;
-    font-weight: bold; 
-    text-decoration: none;   
+    font-size: 1.2em;  
 }
 
 svg {

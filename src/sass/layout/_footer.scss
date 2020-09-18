@@ -1,4 +1,13 @@
 .sticky-footer {
+    position: relative; 
+    @media (min-width: 769px) {
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    }
+}
+
+.sticky-footer2 {    
     position: fixed; 
     bottom: 0;
     width: 100%;
