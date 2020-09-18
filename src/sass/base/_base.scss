@@ -3,7 +3,7 @@ a:hover {
 }
 
 .col-6 {
-    @include media-breakpoint-up(sm) {
+    @media (min-width: 576px) {
         margin: 0;
     }
 }

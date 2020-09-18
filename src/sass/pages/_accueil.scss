@@ -5,31 +5,31 @@
             width: 135px;    
             border : solid white 1px;
             overflow: hidden;
-            @include media-breakpoint-up(sm) {
+            @media (min-width: 576px) {
                 width: 220px;
              }
-            @include media-breakpoint-up(md) {
+            @media (min-width: 768px) {
                 width: 310px;
             }
-            @include media-breakpoint-up(lg) {
+            @media (min-width: 992px) {
                 width: 430px;
             }
-            @include media-breakpoint-up(xl) {
+            @media (min-width: 1200px) {
                 width: 520px;
             }
         }
         &-top {
         height: 90px;
-        @include media-breakpoint-up(sm) {
+        @media (min-width: 576px) {
             height: 145px
         }
-        @include media-breakpoint-up(md) {
+        @media (min-width: 768px) {
             height: 200px
         }
-        @include media-breakpoint-up(lg) {
+        @media (min-width: 992px) {
             height: 280px
         }
-        @include media-breakpoint-up(xl) {
+        @media (min-width: 1200px) {
             height: 340px
         }
         }

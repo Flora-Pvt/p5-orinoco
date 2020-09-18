@@ -1,13 +1,22 @@
 .sticky-footer {
     position: relative; 
-    @media (min-width: 769px) {
+    @media (min-height: 800px) {
     position: fixed; 
     bottom: 0;
     width: 100%;
     }
 }
 
-.sticky-footer2 {    
+.sticky-footer2 {
+    position: relative; 
+    @media (min-height: 1200px) {
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    }
+}
+
+.sticky-footer3 {    
     position: fixed; 
     bottom: 0;
     width: 100%;
