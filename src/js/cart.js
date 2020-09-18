@@ -24,6 +24,7 @@ function displayCart() {
       let clone = template.content.cloneNode(true);
       let img = clone.getElementById('img');
       img.setAttribute('src', productsInCart[i].imageUrl);
+      img.setAttribute('alt', "ours en peluche " + productsInCart[i].name);
       let name = clone.getElementById('name');
       let productPrice = clone.getElementById('product-price');
       let reference = clone.getElementById('reference');
@@ -108,10 +109,12 @@ function displayCart() {
 
   // déclare le total
   let total = 0;
-  // pour chaque produit dans le panier...
-  for (i = 0; i < productsInCart.length; i++) {
-    // ...ajoute le prix au total déclaré   
-    total = total + parseInt(productsInCart[i].number * productsInCart[i].price);
+  if (productsInCart) {
+    // pour chaque produit dans le panier...
+    for (i = 0; i < productsInCart.length; i++) {
+      // ...ajoute le prix au total déclaré   
+      total = total + parseInt(productsInCart[i].number * productsInCart[i].price);
+    }
   }
   // affiche le total dans le html
   cartTotal.innerHTML = total / 100;
@@ -184,10 +187,12 @@ displayCart();
 window.addEventListener("load", function () {
   let inCart = JSON.parse(localStorage.getItem('cart'));
   let quantityInCart = 0;
-  for (i = 0; i < inCart.length; i++) {
-    quantityInCart += inCart[i].number;
+  if (inCart) {
+    for (i = 0; i < inCart.length; i++) {
+      quantityInCart += inCart[i].number;
+    }
+    document.querySelector('.cart-items').innerHTML = quantityInCart;
   }
-  document.querySelector('.cart-items').innerHTML = quantityInCart;
 });
 
 /* --- affiche les aides pour le formulaire --- */

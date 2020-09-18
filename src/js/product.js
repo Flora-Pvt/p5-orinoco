@@ -37,7 +37,7 @@ function displayProducts(products) {
     description.innerHTML = products.description;
     for (i = 0; i < products.colors.length; i++) {
         let color = document.createElement("option");
-        color.setAttribute("value", "color");
+        color.setAttribute("for", "colors");
         color.innerHTML = products.colors[i];
         colors.appendChild(color);
     }
@@ -110,9 +110,11 @@ makeRequest(url + productId);
 window.addEventListener("load", function () {
     let inCart = JSON.parse(localStorage.getItem('cart'));
     let quantityInCart = 0;
-    for (i = 0; i < inCart.length; i++) {
-        quantityInCart += inCart[i].number;
+    if (inCart) {
+        for (i = 0; i < inCart.length; i++) {
+            quantityInCart += inCart[i].number;
+        }
+        document.querySelector('.cart-items').innerHTML = quantityInCart;
     }
-    document.querySelector('.cart-items').innerHTML = quantityInCart;
 });
 
