@@ -36,7 +36,7 @@
                 alt="logo Orinoco représenté par un caddie">
         </a>
         <a class="row float-right" href="cart.html" aria-label="lien pour aller au panier">
-            <svg class="cart-btn" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-basket2" fill="currentColor"
+            <svg class="cart-btn bi bi-basket2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                     d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z" />
@@ -66,8 +66,8 @@
                                 <img id="img" class="card-img">
                             </td>
                             <td>
-                                <p id="name" class="font-weight-bold mb-0"></p>
-                                <p id="product-price" class="font-weight-bold mb-1"></p>
+                                <h2 id="name" class="mb-0"></h2>
+                                <p id="product-price" class="mb-1"></p>
                                 <ul class="row">
                                     <li id="reference">Référence : </li>
                                     <li>Total : <span id="price"></span></li>
@@ -88,7 +88,7 @@
                 </table>
                 <form id="form" class="needs-validation col-lg-6" novalidate method="POST">
                     <div class="form-row">
-                        <section class="form-group col-11 col-lg-6">
+                        <div class="form-group col-11 col-lg-6">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email"
                                 placeholder="Indiquez votre adresse courriel"
@@ -96,55 +96,55 @@
                             <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
                             </footer>
-                        </section>
+                        </div>
                     </div>
                     <div class="form-row">
-                        <section class="col-11 col-lg-6 mb-3">
+                        <div class="col-11 col-lg-6 mb-3">
                             <label for="prénom">Prénom</label>
                             <input type="text" class="form-control" id="prénom"
                                 pattern="^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
                             <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
                             </footer>
-                        </section>
-                        <section class="col-11 col-lg-6 mb-3">
+                        </div>
+                        <div class="col-11 col-lg-6 mb-3">
                             <label for="nom">Nom</label>
                             <input type="text" class="form-control" id="nom"
                                 pattern="^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
                             <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
                             </footer>
-                        </section>
+                        </div>
                     </div>
                     <div class="form-row">
-                        <section class="form-group col-11 col-lg-6">
+                        <div class="form-group col-11 col-lg-6">
                             <label for="adresse">Adresse ligne 1</label>
                             <input type="text" class="form-control" id="adresse"
                                 placeholder="Appartement/Suite, Numéro de rue, Rue">
-                        </section>
-                        <section class="form-group col-11 col-lg-6">
+                        </div>
+                        <div class="form-group col-11 col-lg-6">
                             <label for="adresse2">Adresse ligne 2</label>
                             <input type="text" class="form-control" id="adresse2"
                                 placeholder="Bâtiment, étage, code porte, etc.">
-                        </section>
+                        </div>
                     </div>
                     <div class="form-row">
-                        <section class="col-11 col-lg-6 mb-3">
+                        <div class="col-11 col-lg-6 mb-3">
                             <label for="ville">Ville</label>
                             <input type="text" class="form-control" id="ville" placeholder="Ville, localité"
                                 pattern="^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
                             <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
                             </footer>
-                        </section>
-                        <section class="col-11 col-lg-6 mb-3">
+                        </div>
+                        <div class="col-11 col-lg-6 mb-3">
                             <label for="code-postal">Code postal</label>
                             <input type="text" class="form-control" id="code-postal"
                                 placeholder="Indiquez votre code postal. Par exemple 75000" pattern="\d{5}" required>
                             <footer class="invalid-feedback">
                                 Veuillez saisir une donnée valide
                             </footer>
-                        </section>
+                        </div>
                     </div>
                     <p class="font-weight-bold">Total : <span class="cart-total">0</span> €</p>
                     <button id="order-btn" type="submit" class="btn btn-dark">Terminer l'achat</button>
