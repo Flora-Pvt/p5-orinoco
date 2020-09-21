@@ -9,7 +9,7 @@
 
 .sticky-footer2 {
     position: relative; 
-    @media (min-height: 1200px) {
+    @media (min-width: 1024px) {
     position: fixed; 
     bottom: 0;
     width: 100%;

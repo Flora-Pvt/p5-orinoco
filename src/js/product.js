@@ -1,30 +1,16 @@
-const url = 'http://localhost:3000/api/teddies/';
+/* --- déclare les variables --- */
+let addButton = document.getElementById('bag-btn');
+let feedback = document.getElementById('feedback');
+let quantity = document.getElementById('quantity');
 
-const template = document.getElementById('template-product');
-
-/* --- cherche l'id du produit dans l'url --- */
+/* --- cherche l'id du produit cliqué dans l'url --- */
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const productId = urlParams.get('id');
 
-let addButton = document.getElementById('bag-btn');
-let feedback = document.getElementById('feedback');
-
-/* --- faire une requête à partir de l'id --- */
-function makeRequest() {
-    let httpRequest = new XMLHttpRequest();
-    httpRequest.open('GET', url + productId);
-    httpRequest.send();
-    httpRequest.onreadystatechange = function () {
-        if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
-            let products = JSON.parse(httpRequest.responseText);
-            displayProducts(products);
-        }
-    }
-}
-
-/* --- afficher le produit --- */
+/* --- affiche le produit --- */
 function displayProducts(products) {
+    // détermine où afficher les informations du produit dans le HTML
     let clone = template.content.cloneNode(true);
     let img = clone.getElementById('img');
     img.setAttribute('src', products.imageUrl);
@@ -32,7 +18,7 @@ function displayProducts(products) {
     let description = clone.getElementById('description');
     let colors = clone.getElementById('colors');
     let price = clone.getElementById('price');
-
+    // injecte les informations du produit dans le HTML
     name.innerHTML = products.name;
     description.innerHTML = products.description;
     for (i = 0; i < products.colors.length; i++) {
@@ -43,78 +29,38 @@ function displayProducts(products) {
     }
     price.innerHTML += products.price / 100;
 
-    /* --- ajouter au stockage local --- */
-
-    // l'ajout se produira au clic sur le bouton ADD
+    /* --- au clic sur "ajouter" enregistre le produit dans le panier (dans le stockage local) --- */
     addButton.addEventListener('click', function () {
-        let quantity = document.getElementById('quantity');
-
-        // ajoute une key au stockage local pour le panier
-        const cart = localStorage.getItem('cart');
+        const cart = localStorage.getItem('cart'); // ajoute une clé au stockage local pour le panier
         if (cart && colors.validity.valid === true) {
             inCart = JSON.parse(cart);
+            /* --- si le produit est déjà dans le panier met à jour sa quantité  --- */
             let isPresent = inCart.some(p => p._id == productId);
-            console.log(isPresent);
             if (isPresent) {
-                console.log("ajoute une quantité");
-                let ourProduct = inCart.filter(p => p._id == productId);
+                let id = productId;
+                let ourProduct = inCart.filter(p => p._id == id);
                 ourProduct[0].number++;
-                let newCart = inCart.filter(p => p._id != productId);
-                newCart.push(ourProduct[0]);
-                localStorage.setItem("cart", JSON.stringify(newCart));
-                quantity.innerHTML = ourProduct[0].number;
+                changeQuantity(id, ourProduct, quantity);
                 feedback.innerHTML = "produit ajouté au panier";
             } else {
-                // transforme les données en tableau javascript
-                console.log("ajoute le produit une première fois");
-                //inCart = JSON.parse(cart);
-                products.number = 1;
-                //ajoute le produit au panier            
-                inCart.push(products);
-                // transforme les données en JSON pour les stocker dans le stockage local
-                localStorage.setItem('cart', JSON.stringify(inCart));
-                quantity.innerHTML = products.number;
-                feedback.innerHTML = "produit ajouté au panier";
+                /* --- ajoute ce produit pour la première fois au stockage local --- */
+                firstAddProduct(products);
             }
         } else if (colors.validity.valid === false) {
             feedback.innerHTML = "Veuillez choisir une couleur";
         } else {
-            console.log("tout premier ajout");
-            // contenu déclaré comme un tableau
             inCart = [];
-            products.number = 1;
-            //ajoute le produit au panier
-            inCart.push(products);
-            // transforme les données en JSON pour les stocker dans le stockage local
-            localStorage.setItem('cart', JSON.stringify(inCart));
-
-            quantity.innerHTML = products.number;
-            feedback.innerHTML = "produit ajouté au panier";
+            /* --- ajoute un tout premier produit au stockage local --- */
+            firstAddProduct(products);
         }
-        //event.target.disabled = true;
-
-        /* --- afficher le nombre de produits dans le panier au click--- */
-        
-        let quantityInCart = 0;
-        for (i = 0; i < inCart.length; i++) {
-            quantityInCart += inCart[i].number;
-        }
-        document.querySelector('.cart-items').innerHTML = quantityInCart;
+        /* --- afficher le nouveau nombre de produits à côté du logo--- */
+        displayCartNumber();
     });
     template.parentNode.appendChild(clone);
 }
 
+/* --- demande les informations au serveur et appelle la fonction displayProducts --- */
 makeRequest(url + productId);
 
-/* --- afficher le nombre de produits dans le panier après chargement de la page --- */
-window.addEventListener("load", function () {
-    let inCart = JSON.parse(localStorage.getItem('cart'));
-    let quantityInCart = 0;
-    if (inCart) {
-        for (i = 0; i < inCart.length; i++) {
-            quantityInCart += inCart[i].number;
-        }
-        document.querySelector('.cart-items').innerHTML = quantityInCart;
-    }
-});
-
+/* --- afficher le nombre de produits dans le panier à côté du logo --- */
+displayCartNumber();
