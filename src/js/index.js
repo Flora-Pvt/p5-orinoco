@@ -12,40 +12,38 @@ function main () {
   const dom = new DOM()
   const order = new Order()
 
-  /* --- fonctionnalités de la page index --- */
-  if (index) {
-    data
-      .getProducts()
-      .then(products => {
-        dom.displayProducts(products)
-        dom.displayCartNumber(inCart)
-      })
-  }
-
-  /* --- fonctionnalités de la page produit --- */
-  else if (productId) {
-    data
-      .getProduct(productId)
-      .then(products => {
-        dom.displayProduct(products)
-        dom.displayCartNumber(inCart)
-        order.addProduct(inCart, products, productId)
-      })
-  }
-
-  /* --- fonctionnalités de la page panier --- */
-  else if (cartPage) {
-    dom.displayCart(inCart)
-    dom.displayTotal(inCart)
-    dom.displayCartNumber(inCart)
-    order.operations(inCart)
-    order.formSubmit()
-    data.postData(inCart)
-  }
-
-  /* --- fonctionnalités de la page commande --- */
-  else if (orderId) {
-    dom.displayOrder(orderId)
+  switch (true) {
+    /* --- fonctionnalités de la page index --- */
+    case index !== null:
+      data
+        .getProducts()
+        .then(products => {
+          dom.displayProducts(products)
+          dom.displayCartNumber(inCart)
+        })
+      break
+    /* --- fonctionnalités de la page produit --- */
+    case productId !== null:
+      data
+        .getProduct(productId)
+        .then(products => {
+          dom.displayProduct(products)
+          dom.displayCartNumber(inCart)
+          order.addProduct(inCart, products, productId)
+        })
+      break
+    /* --- fonctionnalités de la page panier --- */
+    case cartPage !== null:
+      dom.displayCart(inCart)
+      dom.displayTotal(inCart)
+      dom.displayCartNumber(inCart)
+      order.operations(inCart)
+      order.formSubmit()
+      data.postData(inCart)
+      break
+    /* --- fonctionnalités de la page commande --- */
+    default:
+      dom.displayOrder(orderId)
   }
 }
 
