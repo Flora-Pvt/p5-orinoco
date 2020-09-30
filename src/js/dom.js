@@ -29,7 +29,7 @@ class DOM {
     products.forEach(products => {
       const clone = template.content.cloneNode(true)
       this.productsBase(products, clone)
-      // affiche les informations supplémentaires du produit dans le HTML
+      // affiche les informations supplémentaires des produits dans le HTML
       const id = clone.getElementById('id')
       const link = clone.getElementById('link')
       id.setAttribute('href', 'pages/produit.html?id=' + products._id)
@@ -70,14 +70,13 @@ class DOM {
         const clone = template.content.cloneNode(true)
         const products = inCart
         this.productsBase(products, clone)
-        // détermine où afficher les informations des produits dans le HTML
+        // affiche les informations supplémentaires des produits dans le HTML
         const productTotal = clone.getElementById('product-total')
         const reference = clone.getElementById('reference')
         const quantity = clone.getElementById('quantity')
         const removeBtn = clone.getElementById('remove')
         const addBtn = clone.getElementById('add')
         const clearBtn = clone.getElementById('clear')
-        // injecte les informations des produits dans le HTML
         clearBtn.dataset.id = products._id
         addBtn.dataset.id = products._id
         removeBtn.dataset.id = products._id
@@ -89,7 +88,7 @@ class DOM {
     }
   }
 
-  /* --- affiche le prix total d'une ligne de produits --- */
+  /* --- affiche le prix total d'un produit ajouté plusieurs fois --- */
   displayProductTotal (ourProduct) {
     const parent = event.target.parentElement
     const parentTotal = parent.previousElementSibling

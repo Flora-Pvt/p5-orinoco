@@ -32,22 +32,21 @@ class Order {
     }
   }
 
-  /* --- page produit : ajoute un produit en fonction du panier --- */
+  /* --- page produit : ajoute un produit dans le panier(stockage local) --- */
   addProduct (inCart, products, productId) {
     const addBtn = document.getElementById('add')
     const feedback = document.getElementById('feedback')
-    // enregistre le produit au panier (dans le stockage local)
     addBtn.addEventListener('click', () => {
+      // si déjà dans le panier met à jour sa quantité
       if (inCart && colors.validity.valid === true) {
-        // si déjà dans le panier met à jour sa quantité
         const isPresent = inCart.some(p => p._id === productId)
         if (isPresent) {
           const order = new Order()
           order.changeQuantity(inCart)
           feedback.innerHTML = 'Quantité dans le panier : '
         }
+        // ajoute ce produit pour la première fois au panier
         else {
-          // ajoute ce produit pour la première fois
           products.number = 1
           inCart.push(products)
           localStorage.setItem('cart', JSON.stringify(inCart))
@@ -59,21 +58,21 @@ class Order {
       else if (colors.validity.valid === false) {
         feedback.innerHTML = 'Veuillez choisir une couleur.'
       }
+      // ajoute un tout premier produit au panier
       else {
         inCart = []
-        // ajoute un tout premier produit au stockage local
         products.number = 1
         inCart.push(products)
         localStorage.setItem('cart', JSON.stringify(inCart))
         quantity.innerHTML = products.number
         feedback.innerHTML = 'Quantité dans le panier : '
         console.log(this.dom, inCart)
-        this.dom.displayCartNumber(inCart) // /!\ ne marche pas
+        this.dom.displayCartNumber(inCart)
       }
     })
   }
 
-  /* --- page panier : supprime, ajoute ou enlève --- */
+  /* --- page panier : supprime, ajoute ou enlève un produit --- */
   operations (inCart) {
     const cartContent = document.querySelector('.cart-content')
     cartContent.addEventListener('click', event => {

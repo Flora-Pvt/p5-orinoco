@@ -1,8 +1,10 @@
 function main () {
+  /* --- obtient l'id du produit à afficher sur la page produit --- */
   const queryString = window.location.search
   const urlParams = new URLSearchParams(queryString)
   const productId = urlParams.get('id')
 
+  /* --- variables utilisées par notre fonction main--- */
   const inCart = JSON.parse(localStorage.getItem('cart'))
   const index = document.getElementById('index')
   const cartPage = document.getElementById('cart')
