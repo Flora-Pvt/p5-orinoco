@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="description" content="Orinoco vend des ours en peluche faits main.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="../dist/css/style.css" />
 
     <title>Orinoco, ours en peluche faits main</title>
@@ -52,15 +53,15 @@
     </header>
 
     <!-- cart -->
-    <main class="container">
-        <section class="cart">
+    <main id="cart" class="container">
+        <section>
             <h1 class="text-center cart-title">Panier</h1>
             <div class="row">
                 <p id="no-product" class="font-weight-bold"></p>
-                <table class="table col-lg-6 mb-3">
+                <table class="cart-content table col-lg-6 mb-3">
                     <!-- produits -->
 
-                    <template id="template-product">
+                    <template id="template">
                         <tr>
                             <td class="cart-img">
                                 <img id="img" class="card-img">
@@ -73,13 +74,13 @@
                                     <li>Total : <span id="product-total"></span></li>
                                 </ul>
                                 <div class="row">
-                                    <button id="remove" class="btn btn-light mr-lg-3"> - </button>
-                                    <span id="quantity"></span>
-                                    <button id="add" class="btn btn-light ml-lg-3"> + </button>
+                                    <button id="remove" class="remove btn btn-light mr-lg-3"> - </button>
+                                    <span id="quantity" class="quantity"></span>
+                                    <button id="add" class="add btn btn-light ml-lg-3"> + </button>
                                 </div>
                             </td>
                             <td>
-                                <button id="clear" class="btn btn-light"> x </button>
+                                <button id="clear" class="clear btn btn-light"> x </button>
                             </td>
                         </tr>
                     </template>
@@ -89,18 +90,18 @@
                 <form id="form" class="needs-validation col-lg-6" novalidate method="POST">
                     <div class="form-row">
                         <div class="form-group col-11 col-lg-6">
-                            <label for="email">Email</label>
+                            <label for="email">Email*</label>
                             <input type="email" class="form-control" id="email"
                                 placeholder="Indiquez votre adresse courriel"
-                                pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+">
+                                pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+" required>
                             <footer class="invalid-feedback">
-                                Veuillez saisir une donnée valide
+                                Veuillez saisir un email valide
                             </footer>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-11 col-lg-6 mb-3">
-                            <label for="prénom">Prénom</label>
+                            <label for="prénom">Prénom*</label>
                             <input type="text" class="form-control" id="prénom"
                                 pattern="^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
                             <footer class="invalid-feedback">
@@ -108,7 +109,7 @@
                             </footer>
                         </div>
                         <div class="col-11 col-lg-6 mb-3">
-                            <label for="nom">Nom</label>
+                            <label for="nom">Nom*</label>
                             <input type="text" class="form-control" id="nom"
                                 pattern="^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
                             <footer class="invalid-feedback">
@@ -118,9 +119,12 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-11 col-lg-6">
-                            <label for="adresse">Adresse ligne 1</label>
+                            <label for="adresse">Adresse ligne 1*</label>
                             <input type="text" class="form-control" id="adresse"
-                                placeholder="Appartement/Suite, Numéro de rue, Rue">
+                                placeholder="Appartement/Suite, Numéro de rue, Rue" required>
+                            <footer class="invalid-feedback">
+                                Veuillez saisir une donnée
+                            </footer>
                         </div>
                         <div class="form-group col-11 col-lg-6">
                             <label for="adresse2">Adresse ligne 2</label>
@@ -130,7 +134,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-11 col-lg-6 mb-3">
-                            <label for="ville">Ville</label>
+                            <label for="ville">Ville*</label>
                             <input type="text" class="form-control" id="ville" placeholder="Ville, localité"
                                 pattern="^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$" required>
                             <footer class="invalid-feedback">
@@ -138,7 +142,7 @@
                             </footer>
                         </div>
                         <div class="col-11 col-lg-6 mb-3">
-                            <label for="code-postal">Code postal</label>
+                            <label for="code-postal">Code postal*</label>
                             <input type="text" class="form-control" id="code-postal"
                                 placeholder="Indiquez votre code postal. Par exemple 75000" pattern="\d{5}" required>
                             <footer class="invalid-feedback">
@@ -165,8 +169,11 @@
     </footer>
 
     <!--scripts-->
-    <script src="../src/js/functions.js"></script>
-    <script src="../src/js/cart.js"></script>
+
+    <script src="../src/js/dataSource.js"></script>
+    <script src="../src/js/dom.js"></script> <!-- gere l'affichage -->
+    <script src="../src/js/order.js"></script>
+    <script src="../src/js/index.js"></script>
 
 </body>
 

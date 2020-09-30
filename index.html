@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="description" content="Orinoco vend des ours en peluche faits main.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="dist/css/style.css" />
 
     <title>Orinoco, ours en peluche faits main</title>
@@ -21,7 +22,8 @@
     <meta property="og:title" content="Orinoco, choisissez votre ours en peluche fait main." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://github.com/Flora-Pvt/p5-orinoco" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/Flora-Pvt/p5-orinoco/src/static/images/logo-orinoco-small.png" />
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/Flora-Pvt/p5-orinoco/src/static/images/logo-orinoco-small.png" />
     <meta property="og:description" content="Orinoco vend des ours en peluche faits main." />
     <meta property="og:site_name" content="Orinoco" />
 </head>
@@ -31,7 +33,8 @@
     <!-- header -->
     <header class="navbar bg-white border-bottom box-shadow">
         <a class="mx-auto" href="index.html" aria-label="lien pour aller à la page d'accueil">
-            <img class="navbar-img" src="src/static/images/logo-orinoco-small.png" alt="logo Orinoco représenté par un caddie">
+            <img class="navbar-img" src="src/static/images/logo-orinoco-small.png"
+                alt="logo Orinoco représenté par un caddie">
         </a>
         <a class="row float-right" href="pages/panier.html" aria-label="lien pour aller au panier">
             <svg class="cart-btn bi bi-basket2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
@@ -50,23 +53,23 @@
     </header>
 
     <!-- main -->
-    <main class="container row mx-auto">
+    <main class="container row mx-auto" id="index">
         <!-- products -->
-        <template id="template-product">
+        <template id="template">
             <article class="card col-6">
                 <header class="card-img-border">
                     <a id="id">
                         <img id="img" class="card-img-top zoom" alt="teddy bear" />
                     </a>
                 </header>
-                <section class="card-body text-body">
+                <section class="card-body">
                     <a id="link">
-                        <p id="name" class="card-title text-body">
+                        <p id="name" class="text-body">
 
                         </p>
                     </a>
-                    <p class="card-text">
-                        <span id="price"></span> €
+                    <p id="price">
+
                     </p>
                 </section>
             </article>
@@ -84,9 +87,10 @@
     </footer>
 
     <!--scripts-->
-    <script src="src/js/functions.js"></script>
+    <script src="src/js/dataSource.js"></script>
+    <script src="src/js/dom.js"></script> <!-- gere l'affichage -->
+    <script src="src/js/order.js"></script>
     <script src="src/js/index.js"></script>
-
 </body>
 
 </html>
