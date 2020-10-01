@@ -1,7 +1,7 @@
 const url = 'http://localhost:3000/api/teddies'
 
 /* --- obtient les datas du serveur --- */
-class DataSource {
+export class DataSource {
   /* --- page index : demande tous les produits --- */
   async getProducts () {
     try {

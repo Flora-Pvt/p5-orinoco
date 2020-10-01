@@ -1,5 +1,8 @@
-class DOM {
-  template = document.getElementById('template')
+export class DOM {
+  constructor () {
+    this.template = document.getElementById('template')
+  }
+
   /* --- affiche le nombre de produits à côté du logo du panier --- */
   displayCartNumber (inCart) {
     let quantityInCart = 0
@@ -27,20 +30,20 @@ class DOM {
   /* --- affiche tous les produits sur la page index --- */
   displayProducts (products) {
     products.forEach(products => {
-      const clone = template.content.cloneNode(true)
+      const clone = this.template.content.cloneNode(true)
       this.displayProductsBase(products, clone)
       // affiche les informations supplémentaires des produits dans le HTML
       const id = clone.getElementById('id')
       const link = clone.getElementById('link')
       id.setAttribute('href', 'pages/produit.html?id=' + products._id)
       link.setAttribute('href', 'pages/produit.html?id=' + products._id)
-      template.parentNode.appendChild(clone)
+      this.template.parentNode.appendChild(clone)
     })
   }
 
   /* --- affiche un seul produit sur la page produit --- */
   displayProduct (products) {
-    const clone = template.content.cloneNode(true)
+    const clone = this.template.content.cloneNode(true)
     this.displayProductsBase(products, clone)
     // affiche les informations supplémentaires du produit dans le HTML
     const description = clone.getElementById('description')
@@ -55,7 +58,7 @@ class DOM {
       colors.appendChild(color)
     })
     addBtn.dataset.id = products._id
-    template.parentNode.appendChild(clone)
+    this.template.parentNode.appendChild(clone)
   }
 
   /* --- affiche tous les produits sur la page panier --- */
@@ -67,7 +70,7 @@ class DOM {
     }
     else {
       inCart.forEach(inCart => {
-        const clone = template.content.cloneNode(true)
+        const clone = this.template.content.cloneNode(true)
         const products = inCart
         this.displayProductsBase(products, clone)
         // affiche les informations supplémentaires des produits dans le HTML
@@ -83,12 +86,12 @@ class DOM {
         reference.innerHTML += products._id
         quantity.innerHTML = products.number
         productTotal.innerHTML += (products.number * products.price) / 100 + ' €'
-        template.parentNode.appendChild(clone)
+        this.template.parentNode.appendChild(clone)
       })
     }
   }
 
-  /* --- affiche le prix total d'un produit ajouté plusieurs fois --- */
+  /* --- affiche le prix total d'un produit selon sa quantité --- */
   displayProductTotal (ourProduct) {
     const parent = event.target.parentElement
     const parentTotal = parent.previousElementSibling
@@ -113,12 +116,12 @@ class DOM {
   /* --- affiche le n° de commande et le total sur la page commande --- */
   displayOrder (orderId) {
     if (orderId) {
-      const clone = template.content.cloneNode(true)
+      const clone = this.template.content.cloneNode(true)
       const total = localStorage.getItem('total')
       clone.getElementById('order')
       clone.getElementById('total').innerHTML += total / 100
       clone.getElementById('orderId').innerHTML += orderId
-      template.parentNode.appendChild(clone)
+      this.template.parentNode.appendChild(clone)
       localStorage.clear()
     }
   }

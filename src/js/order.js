@@ -1,4 +1,6 @@
-class Order {
+import { DOM } from './dom.js'
+
+export class Order {
   constructor () {
     this.dom = new DOM()
   }

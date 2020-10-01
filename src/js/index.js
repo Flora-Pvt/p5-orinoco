@@ -1,3 +1,7 @@
+import { DataSource } from './dataSource.js'
+import { DOM } from './dom.js'
+import { Order } from './order.js'
+
 function main () {
   /* --- obtient l'id du produit à afficher sur la page produit --- */
   const queryString = window.location.search
