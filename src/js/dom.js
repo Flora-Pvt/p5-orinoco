@@ -12,7 +12,7 @@ class DOM {
   }
 
   /* --- fonction réutilisable pour afficher la base des produits --- */
-  productsBase (products, clone) {
+  displayProductsBase (products, clone) {
     // détermine où afficher les informations des produits dans le HTML
     const img = clone.getElementById('img')
     const name = clone.getElementById('name')
@@ -28,7 +28,7 @@ class DOM {
   displayProducts (products) {
     products.forEach(products => {
       const clone = template.content.cloneNode(true)
-      this.productsBase(products, clone)
+      this.displayProductsBase(products, clone)
       // affiche les informations supplémentaires des produits dans le HTML
       const id = clone.getElementById('id')
       const link = clone.getElementById('link')
@@ -41,7 +41,7 @@ class DOM {
   /* --- affiche un seul produit sur la page produit --- */
   displayProduct (products) {
     const clone = template.content.cloneNode(true)
-    this.productsBase(products, clone)
+    this.displayProductsBase(products, clone)
     // affiche les informations supplémentaires du produit dans le HTML
     const description = clone.getElementById('description')
     const colors = clone.getElementById('colors')
@@ -69,7 +69,7 @@ class DOM {
       inCart.forEach(inCart => {
         const clone = template.content.cloneNode(true)
         const products = inCart
-        this.productsBase(products, clone)
+        this.displayProductsBase(products, clone)
         // affiche les informations supplémentaires des produits dans le HTML
         const productTotal = clone.getElementById('product-total')
         const reference = clone.getElementById('reference')

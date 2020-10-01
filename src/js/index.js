@@ -39,7 +39,7 @@ function main () {
       dom.displayCart(inCart)
       dom.displayTotal(inCart)
       dom.displayCartNumber(inCart)
-      order.operations(inCart)
+      order.cartOperations(inCart)
       order.formSubmit()
       data.postData(inCart)
       break

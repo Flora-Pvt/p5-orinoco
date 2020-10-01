@@ -9,11 +9,11 @@
 }
 
 .float-right {
-@media screen and (max-width: 320px) {
-    position: absolute;
-    right: 0.5rem;
-    top: 0.5rem;
-}
+    @media screen and (max-width: 320px) {
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+    }
 }
 
 .cart-items {    

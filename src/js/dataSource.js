@@ -8,8 +8,8 @@ class DataSource {
       const request = await fetch(url)
       const products = await request.json()
       return products
-    } catch (e) {
-      alert(e)
+    } catch (error) {
+      alert(error)
     }
   }
 
@@ -19,8 +19,8 @@ class DataSource {
       const request = await fetch(`${url}/${productId}`)
       const products = await request.json()
       return products
-    } catch (e) {
-      alert(e)
+    } catch (error) {
+      alert(error)
     }
   }
 
@@ -74,8 +74,8 @@ class DataSource {
             localStorage.setItem('orderId', orderId)
             window.location.href = 'commande.html'
           })
-          .catch(function () {
-            alert("Les données n'ont pas pu être envoyées.")
+          .catch(function (error) {
+            alert(error)
           })
       }
     })

@@ -66,14 +66,13 @@ class Order {
         localStorage.setItem('cart', JSON.stringify(inCart))
         quantity.innerHTML = products.number
         feedback.innerHTML = 'Quantité dans le panier : '
-        console.log(this.dom, inCart)
         this.dom.displayCartNumber(inCart)
       }
     })
   }
 
   /* --- page panier : supprime, ajoute ou enlève un produit --- */
-  operations (inCart) {
+  cartOperations (inCart) {
     const cartContent = document.querySelector('.cart-content')
     cartContent.addEventListener('click', event => {
       if (event.target.classList.contains('clear')) {
