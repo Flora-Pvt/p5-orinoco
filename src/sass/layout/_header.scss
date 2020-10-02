@@ -2,8 +2,8 @@
     margin-bottom: 70px;
     &-img {
         @media screen and (max-width: 599px) {
-            width: 50%;
-            height: 50%;            
+            width: 25%;
+            height: 25%;            
         }
     }    
 }
@@ -18,10 +18,6 @@
 
 .cart-items {    
     font-size: 1.2em;  
-}
-
-svg {
-    color: $primary-color;
 }
 
 .box-shadow {

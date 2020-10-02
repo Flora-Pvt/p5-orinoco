@@ -1,7 +1,24 @@
-h2 {
-    font-size: large;
+@font-face {
+    font-family: 'belligerent_madnessregular';
+    src: url('../../../src/static/fonts/belligerent.ttf') format('truetype');
 }
 
-.color {
+h1 {
+    font-family: 'belligerent_madnessregular', 'Segoe UI Black', 'Arial Rounded MT Bold', sans-serif;
+    @media (max-width: 992px) {
+        font-size: 1.6rem;
+    }
+}
+
+.hover-disabled:hover {        
+    text-decoration: none;    
+}
+
+.hover-enabled:hover {     
+    text-decoration: underline $primary-color;   
+    color: $primary-color;     
+}
+
+.primary-color {
     color: $primary-color;
 }

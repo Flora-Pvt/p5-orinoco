@@ -3,43 +3,44 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="Orinoco, vous pouvez commandez vos ours en peluche faits main dès à présent.">
+    <meta name="description" content="Orinobear, vous pouvez commandez vos ours en peluche faits main dès à présent.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="../dist/css/prefixed/style.css" />
 
-    <title>Orinoco, commandez vos ours en peluche faits main</title>
+    <title>Orinobear, commandez vos ours en peluche faits main</title>
 
     <!-- Twitter Card data -->
-    <meta name="twitter:card" content="Orinoco, commandez des ours en peluche fait main.">
-    <meta name="twitter:title" content="Orinoco">
+    <meta name="twitter:card" content="Orinobear, commandez des ours en peluche fait main.">
+    <meta name="twitter:title" content="Orinobear">
     <meta name="twitter:description"
-        content="Orinoco, vous pouvez commandez vos ours en peluche faits main dès à présent.">
+        content="Orinobear, vous pouvez commandez vos ours en peluche faits main dès à présent.">
     <meta name="twitter:image"
         content="https://raw.githubusercontent.com/Flora-Pvt/p5-orinoco/src/static/images/logo-orinoco-small.png">
 
     <!-- Open Graph data -->
-    <meta property="og:title" content="Orinoco, commandez des ours en peluche faits main." />
+    <meta property="og:title" content="Orinobear, commandez des ours en peluche faits main." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://github.com/Flora-Pvt/p5-orinoco" />
     <meta property="og:image"
         content="https://raw.githubusercontent.com/Flora-Pvt/p5-orinoco/src/static/images/logo-orinoco-small.png" />
     <meta property="og:description"
-        content="Orinoco, vous pouvez commandez vos ours en peluche faits main dès à présent." />
-    <meta property="og:site_name" content="Orinoco" />
+        content="Orinobear, vous pouvez commandez vos ours en peluche faits main dès à présent." />
+    <meta property="og:site_name" content="Orinobear" />
 </head>
 
 <body>
 
     <!-- header -->
-    <header class="navbar bg-white border-bottom box-shadow">
-        <a class="mx-auto" href="../index.html" aria-label="lien pour aller à la page d'accueil">
-            <img class="navbar-img" src="../src/static/images/logo-orinoco-small.png"
+    <header class="navbar bg-white border-bottom box-shadow ">        
+        <a class="mx-auto d-flex align-items-center hover-disabled" href="../index.html" aria-label="lien pour aller à la page d'accueil">            
+            <img class="navbar-img" src="../src/static/images/logo-small.png"
                 alt="logo Orinoco représenté par un caddie">
+                <h1 class="text-body mb-0">Orinobear</h1>            
         </a>
-        <a class="row float-right" href="cart.html" aria-label="lien pour aller au panier">
-            <svg class="bi bi-basket2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
+        <a class="row float-right hover-disabled" href="../pages/panier.html" aria-label="lien pour aller au panier">
+            <svg class="primary-color bi bi-basket2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                     d="M1.111 7.186A.5.5 0 0 1 1.5 7h13a.5.5 0 0 1 .489.605l-1.5 7A.5.5 0 0 1 13 15H3a.5.5 0 0 1-.489-.395l-1.5-7a.5.5 0 0 1 .1-.42zM2.118 8l1.286 6h9.192l1.286-6H2.118z" />
@@ -57,7 +58,7 @@
     <!-- cart -->
     <main id="cart" class="container">
         <section>
-            <h1 class="text-center cart-title">Panier</h1>
+            <h2 class="text-center cart-title">Panier</h2>
             <div class="row">
                 <p id="no-product" class="font-weight-bold"></p>
                 <table class="cart-content table col-lg-6 mb-3">
@@ -69,7 +70,7 @@
                                 <img id="img" class="card-img">
                             </td>
                             <td>
-                                <h2 id="name" class="mb-0"></h2>
+                                <h3 id="name" class="h5 mb-0"></h3>
                                 <p id="price" class="mb-1"></p>
                                 <ul class="row">
                                     <li id="reference">Référence : </li>
@@ -153,7 +154,7 @@
                         </div>
                     </div>
                     <p class="font-weight-bold">Total : <span class="cart-total">0</span> €</p>
-                    <button id="order-btn" type="submit" class="btn btn-dark">Terminer l'achat</button>
+                    <button id="order-btn" type="submit" class="btn btn-dark font-weight-bold">Terminer l'achat</button>
                 </form>
             </div>
             <!-- formulaire -->
@@ -164,9 +165,9 @@
 
     <!--footer-->
     <footer class="border-top p-3 sticky-footer2 d-flex justify-content-between">
-        <a class="footer-text" href="legal.html" target="_blank">Mentions légales
+        <a class="footer-text primary-color hover-enabled" href="legal.html" target="_blank">Mentions légales
         </a>
-        <a class="footer-text" href="mailto:contact@orinoco.com">Contact
+        <a class="footer-text primary-color hover-enabled" href="mailto:contact@orinoco.com">Contact
         </a>
     </footer>
 
