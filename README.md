@@ -5,7 +5,7 @@ Le projet Orinoco est le MVP d'une API qui propose des ours en peluche fait main
 
 ## Technologies utilisées
 
-HTML, CSS, Sass, Bootstrap, Javascript, Webpack.
+HTML, CSS, Sass, Bootstrap, Javascript, Webpack, Babel, Eslint.
 
 
 ## Prérequis avant de démarrer le projet
