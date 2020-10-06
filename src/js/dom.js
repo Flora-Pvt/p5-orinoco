@@ -97,7 +97,7 @@ export class DOM {
     const parentTotal = parent.previousElementSibling
     const children = parentTotal.children
     const productTotal = children[1]
-    productTotal.innerHTML = (ourProduct[0].number * ourProduct[0].price) / 100 + ' €'
+    productTotal.innerHTML = 'Total : ' + (ourProduct[0].number * ourProduct[0].price) / 100 + ' €'
   }
 
   /* --- affiche le prix total de tous les produits --- */
