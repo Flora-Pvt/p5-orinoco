@@ -1,0 +1,28 @@
+.sticky-footer {
+    position: relative; 
+    @media (min-height: 800px) {
+        position: fixed; 
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+.sticky-footer2 {
+    position: relative; 
+    @media (min-width: 1024px) {
+        position: fixed; 
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+.sticky-footer3 {    
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+}
+
+.border-top { 
+    border-top: 1px solid #e5e5e5;
+    margin-top: 100px;     
+}

@@ -1,5 +1,4 @@
 @import "utils/variables";
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "utils/mixins";
 
 @import "base/base";
@@ -10,7 +9,5 @@
 
 @import "components/buttons";
 
-@import "pages/accueil";
-@import "pages/commande";
-@import "pages/panier";
-@import "pages/produit";
+@import "pages/index";
+@import "pages/cart";

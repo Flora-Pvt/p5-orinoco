@@ -1,0 +1,44 @@
+.card {
+    border : solid white 1px;    
+    &-img {
+        &-border {    
+            width: 135px;    
+            border : solid white 1px;
+            overflow: hidden;
+            @media (min-width: 576px) {
+                width: 220px;
+             }
+            @media (min-width: 768px) {
+                width: 310px;
+            }
+            @media (min-width: 992px) {
+                width: 430px;
+            }
+            @media (min-width: 1200px) {
+                width: 520px;
+            }
+        }
+        &-top {
+        height: 90px;
+        @media (min-width: 576px) {
+            height: 145px
+        }
+        @media (min-width: 768px) {
+            height: 200px
+        }
+        @media (min-width: 992px) {
+            height: 280px
+        }
+        @media (min-width: 1200px) {
+            height: 340px
+        }
+        }
+    }    
+    &-deck--bottom {
+        margin-bottom: 90px;
+    }
+}
+
+.zoom {
+    @include zoom;
+}

@@ -1,0 +1,26 @@
+.navbar {
+    margin-bottom: 70px;
+    &-img {
+        @media screen and (max-width: 599px) {
+            width: 25%;
+            height: 25%;            
+        }
+    }    
+}
+
+.float-right {
+    @media screen and (max-width: 320px) {
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+    }
+}
+
+.cart-items {    
+    font-size: 1.2em;  
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
